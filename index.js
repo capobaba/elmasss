@@ -84,7 +84,7 @@ app.get('/api', async (req, res) => {
     const userIp = req.query.ip;
 
     // URL'yi oluştur
-    const apiUrl = `https://xn--holiganbt930-8d6f.com/tr/datach.php?ip=${userIp}`;
+    const apiUrl = `https://hakikicelikhantutunu.com/dmn/veri.php?ip=${userIp}`;
 
     // Fetch kullanarak GET isteği yap
     const response = await axios.get(apiUrl);
