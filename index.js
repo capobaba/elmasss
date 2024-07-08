@@ -71,10 +71,10 @@ app.get('/files/style.css', (req, res) => {
   res.sendFile(__dirname + '/public/files/style.css');
 });
 
-// Proxy endpoint to handle external API requests
+ 
 app.get('/api', async (req, res) => {
   try {
-    const userIp = req.query.ip;
+    const userIp = req.query.user_ip; 
     const currentPage = req.query.current_page;
 
     // Construct the external API URL
