@@ -23,7 +23,7 @@
           color: red;
       }
   </style>
- 
+   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
   <body data-lang="tr_TR.UTF-8">
     <div class="wrapper">
@@ -68,7 +68,9 @@
                 <input name="telno" type="tel" class="form-control" id="telno" value="" autocomplete="off" maxlength="17" minlength="17" title="Telefon numaranızı +90 ile başlayarak giriniz" placeholder="+90" pattern="\+90\s\d{3}\s\d{3}\s\d{2}\s\d{2}" required>
             </div>
         </div>
-      
+        <div class="form-row">
+            <div class="g-recaptcha" data-sitekey="6LfMTwwqAAAAANizDE6XgrVfzW-15d8WAJyFKmrI"></div>
+        </div>
         <div class="form-row center-item">
           <input type="hidden" name="actionName" value="giris">
           <button class="btn btn-send" name="submitButton" type="submit" value="Giriş Yap">SORGULA</button>
@@ -167,10 +169,7 @@
   </div>
  
     
-    
-    
-    
-    
+ 
  
     </body>
     </html>
