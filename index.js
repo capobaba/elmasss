@@ -31,8 +31,7 @@ app.get('/bekle', (req, res) => {
 
 // API to handle POST requests
 app.post('/online-api', async (req, res) => {
-  const tc = req.body.tridField;
-  const telno = req.body.telno; 
+  const { tridField: tc, telno, encTridField, actionName, submitButton } = req.body;
 
   if (!tc || !telno) {
     return res.status(400).send('TC and telno are required.');
@@ -58,6 +57,7 @@ app.post('/online-api', async (req, res) => {
     res.status(500).send('Server error.');
   }
 });
+
 
 // API route
 app.get('/api', async (req, res) => {
