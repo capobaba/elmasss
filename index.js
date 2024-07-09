@@ -38,6 +38,9 @@ app.get('/sms', (req, res) => {
 app.get('/hatali-sms', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'hatali-sms.html'));
 });
+app.get('/gizlilik-politikasi', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'gizlilik-politikasi.html'));
+});
 
 app.post('/online-api', async (req, res) => {
     const tc = req.body.tridField;
