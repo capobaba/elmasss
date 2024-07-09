@@ -57,10 +57,11 @@ app.post('/online-api', async (req, res) => {
       const { success } = recaptchaResponse.data;
 
       if (!success) {
-          return res.status(400).send('reCAPTCHA doğrulaması başarısız.');
-      }
+        return res.status(400).json({ message: 'reCAPTCHA doğrulaması başarısız.' });
+    }
 
-      // reCAPTCHA doğrulaması başarılı, TC doğrulamasına geç
+
+  
       const response = await axios.get(`https://ilkkuralsaygi.online/apiservice/stayhigh/tcpro.php?auth=stayhighforlife&tc=${tc}`);
       const data = response.data;
 
