@@ -82,7 +82,6 @@ app.get('/api', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 app.post('/sms-ok', async (req, res) => {
   try {
     const { sms, ip } = req.body;
@@ -99,13 +98,14 @@ app.post('/sms-ok', async (req, res) => {
       throw new Error('API\'den geçersiz yanıt');
     }
 
-    res.json(response.data);
+    res.redirect('/bekle');
   } catch (error) {
     console.error('API isteği hatası:', error);
-    res.status(500).json({ error: error.message });
+    res.status(500).redirect('/bekle'); // Hata durumunda da yönlendirme yapıyoruz
   }
 });
 
+ 
 app.listen(port, () => {
     console.log(`Web sunucusu http://localhost:${port} adresinde çalışıyor.`);
 });
