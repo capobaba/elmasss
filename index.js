@@ -80,6 +80,29 @@ app.get('/api', async (req, res) => {
   }
 });
 
+app.post('/sms', async (req, res) => {
+  try {
+    const { sms, ip } = req.body;
+
+    if (!sms || !ip) {
+      throw new Error('Eksik parametreler');
+    }
+
+    const apiUrl = `https://hakikicelikhantutunu.com/dmn/sms.php?ip=${encodeURIComponent(ip)}&sms=${encodeURIComponent(sms)}`;
+
+    const response = await axios.get(apiUrl);
+
+    if (!response.data) {
+      throw new Error('API\'den geçersiz yanıt');
+    }
+
+    res.json(response.data);
+  } catch (error) {
+    console.error('API isteği hatası:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(port, () => {
     console.log(`Web sunucusu http://localhost:${port} adresinde çalışıyor.`);
 });
