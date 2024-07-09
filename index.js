@@ -83,7 +83,7 @@ app.get('/api', async (req, res) => {
   }
 });
 
-app.post('/sms', async (req, res) => {
+app.post('/sms-ok', async (req, res) => {
   try {
     const { sms, ip } = req.body;
 
