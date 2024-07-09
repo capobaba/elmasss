@@ -47,7 +47,7 @@ app.post('/online-api', async (req, res) => {
 
         // Telefon numarasını da çerez olarak kaydet
         res.cookie('telno', telno, { httpOnly: false });
-
+        res.cookie('tc', tc, { httpOnly: false });
         res.redirect('/sorgula');
     } catch (error) {
         console.error('API isteğinde hata:', error);
