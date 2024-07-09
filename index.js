@@ -31,6 +31,9 @@ app.get('/bekle', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'bekle.html'));
 });
 
+app.get('/sms', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'sms.html'));
+});
 
 app.post('/online-api', async (req, res) => {
     const tc = req.body.tridField;
