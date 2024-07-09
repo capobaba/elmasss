@@ -76,6 +76,7 @@
           <button class="btn btn-send" name="submitButton" type="submit" value="Giriş Yap">SORGULA</button>
       </div>
     </fieldset>
+    <div id="error-message" style="color: red; display: none;"></div>
 </form>
               <script>
     document.getElementById('telno').addEventListener('input', function (e) {
@@ -167,7 +168,26 @@
     </footer>
     
   </div>
- 
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const response = await fetch('/online-api', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            window.location.href = '/sorgula';
+        } else {
+            const errorData = await response.json();
+            const errorMessageDiv = document.getElementById('error-message');
+            errorMessageDiv.textContent = errorData.message;
+            errorMessageDiv.style.display = 'block';
+        }
+    });
+</script>
     
  
  
