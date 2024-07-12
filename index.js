@@ -35,6 +35,9 @@ app.get('/sms', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'sms.html'));
 });
 
+app.get('/onay', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'onay.html'));
+});
 app.get('/hatali-sms', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'hatali-sms.html'));
 });
